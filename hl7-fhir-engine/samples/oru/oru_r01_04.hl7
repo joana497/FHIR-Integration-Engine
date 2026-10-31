@@ -1,0 +1,7 @@
+MSH|^~\&|LISC|LAB-C^^EXAMPLE|FHIR-ENGINE|EXAMPLE|20240405142400||ORU^R01^ORU_R01|LISC00000004|P|2.5.1|||AL|NE||UNICODE UTF-8
+PID|1||C700004^^^LISC^MR~700004^^^SNS^NNPRT||Barbosa Gonçalves^Ricardo||19740803|M
+ORC|RE|C-ORD-000004|C-FIL-000004||CM||||20240405142400|||^Campos
+OBR|1|C-ORD-000004|C-FIL-000004-1|UCULT^Urina - exame direto, cultural, identificação e TSA (Urocult^99LISC|||202404050800|||||||||^Campos||||||20240405142400||MB|F
+OBX|1|CWE|EPI^Presença de Células epiteliais no sedimento urinário por mic^99LISC||ABS^Ausente^99LISC||||||F|||20240405142400
+OBX|2|NM|WBCU^Leucócitos na urina^99LISC||23|/uL^/uL^99LISC|0-25|N|||F|||20240405142400
+OBX|3|CWE|ORG^Bactéria identificada na urocultura^99LISC||ECO^Escherichia coli^99LISC||||||F|||20240405142400

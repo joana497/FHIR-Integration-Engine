@@ -1,0 +1,196 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# HL7 FHIR Engine - Full Stack
+#
+# Services:
+#   postgres          - Legacy SIL database (sildb) and the second
+#                       laboratory system LIS-B (lisbdb), plus the audit
+#                       and terminology schemas and the least-privilege roles
+#   python-fhir-engine - FastAPI: reads legacy DB, maps to FHIR R4
+#   node-middleware   - Express: orchestrates, validates, syncs to HAPI;
+#                       HL7 v2 ORU^R01 receiver (HTTP and MLLP on 2575)
+#   hapi-fhir         - Official HAPI FHIR R4 server (JPA)
+#   hapi-postgres     - Dedicated DB for HAPI FHIR JPA store
+#
+# Database roles (postgres/07_roles.sql):
+#   sil_user      owner, used only by the init scripts and the generator
+#   sil_reader    SELECT-only on sildb.sil       -> python-fhir-engine
+#   lisb_reader   SELECT-only on lisbdb.lis      -> python-fhir-engine
+#   audit_writer  INSERT/SELECT on audit.*, cache writes on terminology.*
+#                                                -> node-middleware
+# The passwords below are demonstration values. The init scripts run only
+# on an empty volume: after changing them run `docker compose down -v`.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── Legacy SIL PostgreSQL ───────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: sil-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sil_user
+      POSTGRES_PASSWORD: sil_pass
+      POSTGRES_DB: sildb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./postgres/02_seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+      - ./postgres/02b_seed_lab.sql:/docker-entrypoint-initdb.d/02b_seed_lab.sql:ro
+      - ./postgres/03_audit_schema.sql:/docker-entrypoint-initdb.d/03_audit_schema.sql:ro
+      - ./postgres/04_terminology_schema.sql:/docker-entrypoint-initdb.d/04_terminology_schema.sql:ro
+      - ./postgres/05_lisb_schema.sql:/docker-entrypoint-initdb.d/05_lisb_schema.sql:ro
+      - ./postgres/06_lisb_seed.sql:/docker-entrypoint-initdb.d/06_lisb_seed.sql:ro
+      - ./postgres/07_roles.sql:/docker-entrypoint-initdb.d/07_roles.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sil_user -d sildb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fhir-net
+
+  # ── HAPI FHIR Dedicated PostgreSQL ──────────────────────────────────────────
+  hapi-postgres:
+    image: postgres:16-alpine
+    container_name: hapi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hapi_user
+      POSTGRES_PASSWORD: hapi_pass
+      POSTGRES_DB: hapifhirdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - hapi_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hapi_user -d hapifhirdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fhir-net
+
+  # ── HAPI FHIR Server ─────────────────────────────────────────────────────────
+  hapi-fhir:
+    # 'latest' is not reproducible: for the measurements, pin the tag or
+    # digest that scripts/record_environment.py reports (HAPI_IMAGE).
+    image: ${HAPI_IMAGE:-hapiproject/hapi:latest}
+    container_name: hapi-fhir
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      spring.datasource.url: jdbc:postgresql://hapi-postgres:5432/hapifhirdb
+      spring.datasource.username: hapi_user
+      spring.datasource.password: hapi_pass
+      spring.datasource.driverClassName: org.postgresql.Driver
+      spring.jpa.properties.hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hapi.fhir.fhir_version: R4
+      hapi.fhir.allow_multiple_delete: "true"
+      hapi.fhir.allow_external_references: "true"
+      hapi.fhir.cors.allowed_origin: "*"
+      hapi.fhir.narrative_enabled: "false"
+      hapi.fhir.advanced_lucene_indexing: "false"
+    volumes:
+      - hapi_data:/data/hapi
+    depends_on:
+      hapi-postgres:
+        condition: service_healthy
+    # HAPI FHIR uses a distroless image (no curl/wget/sh) so we rely on
+    # service_started + middleware retry logic instead of a healthcheck here.
+    networks:
+      - fhir-net
+
+  # ── Python FHIR Engine ───────────────────────────────────────────────────────
+  python-fhir-engine:
+    build:
+      context: ./python-fhir-engine
+      dockerfile: Dockerfile
+    container_name: python-fhir-engine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Read-only roles (requirement R1): the engine cannot modify the
+      # legacy databases even if its code tried to.
+      DATABASE_URL: postgresql://sil_reader:sil_reader_pass@postgres:5432/sildb
+      LISB_DATABASE_URL: postgresql://lisb_reader:lisb_reader_pass@postgres:5432/lisbdb
+      CONCEPTMAP_PATH: /app/conceptmaps/lab-catalogue.json
+      # Time zone of source timestamps without one (FHIR requires a zone with every time)
+      SOURCE_TIMEZONE: ${SOURCE_TIMEZONE:-Europe/Lisbon}
+      LOG_LEVEL: info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health',timeout=3).status==200 else 1)\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - fhir-net
+
+  # ── Node.js Middleware ────────────────────────────────────────────────────────
+  node-middleware:
+    build:
+      context: ./node-middleware
+      dockerfile: Dockerfile
+    container_name: node-middleware
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "2575:2575"   # HL7 v2 MLLP listener
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      PYTHON_ENGINE_URL: http://python-fhir-engine:8000
+      HAPI_FHIR_URL: http://hapi-fhir:8080/fhir
+      # Synchronisation is triggered by a user (or a script). Set to "true"
+      # for a 5-minute cron that runs as the actor 'system:cron'.
+      AUTO_SYNC: "false"
+      LOG_LEVEL: info
+      JWT_SECRET: "${JWT_SECRET:-demo-only-CHANGE-THIS-IN-PRODUCTION}"
+      TOKEN_TTL: "1800"
+      CORS_ORIGINS: "http://localhost:3000,http://localhost:5173"
+      RATE_LIMIT_PER_MIN: "${RATE_LIMIT_PER_MIN:-300}"
+      AUDIT_DATABASE_URL: postgresql://audit_writer:audit_writer_pass@postgres:5432/sildb
+      AUDIT_OUTBOX_PATH: /var/lib/fhir-middleware/audit-outbox.jsonl
+      MLLP_PORT: "2575"
+      MLLP_ALLOWED_HOSTS: ""          # empty = any; list sender IPs in production
+      ORU_STRUCTURAL_VALIDATION: "false"
+      TERMINOLOGY_SERVER_URL: "https://tx.fhir.org/r4"
+      TERMINOLOGY_ENABLED: "true"
+      TERMINOLOGY_TIMEOUT_MS: "5000"
+    volumes:
+      - audit_outbox:/var/lib/fhir-middleware
+    depends_on:
+      postgres:
+        condition: service_healthy
+      python-fhir-engine:
+        condition: service_healthy
+      hapi-fhir:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3000/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - fhir-net
+
+# ─── Volumes ──────────────────────────────────────────────────────────────────
+volumes:
+  postgres_data:
+  hapi_postgres_data:
+  hapi_data:
+  audit_outbox:
+
+# ─── Networks ─────────────────────────────────────────────────────────────────
+networks:
+  fhir-net:
+    driver: bridge

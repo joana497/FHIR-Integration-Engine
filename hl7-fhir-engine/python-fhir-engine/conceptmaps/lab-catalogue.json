@@ -1,0 +1,2949 @@
+{
+ "resourceType": "ConceptMap",
+ "id": "lab-catalogue",
+ "url": "http://example.org/fhir/ConceptMap/lab-catalogue",
+ "version": "1.0.0",
+ "name": "LabCatalogueConceptMap",
+ "title": "Local laboratory codes to LOINC, UCUM and SNOMED CT (demonstration catalogue)",
+ "status": "active",
+ "experimental": true,
+ "date": "2026-10-24",
+ "publisher": "HL7 FHIR integration engine (dissertation demonstration)",
+ "description": "Maps the local laboratory codes, unit strings and qualitative result values of the three demonstration sources (SIL, second SQL system, HL7 v2 laboratory) to LOINC, UCUM and SNOMED CT. Standard codes are taken from CPAL v7.0 (SPMS); each target carries the CPAL line it came from.",
+ "group": [
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisb-analyte",
+   "target": "http://loinc.org",
+   "element": [
+    {
+     "code": "B-HGB",
+     "display": "Hemoglobina no sangue",
+     "target": [
+      {
+       "code": "718-7",
+       "display": "Hemoglobin [Mass/volume] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2019 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-HCT",
+     "display": "Hematócrito  de Sangue por Contagem Automatizada",
+     "target": [
+      {
+       "code": "4544-3",
+       "display": "Hematocrit [Volume Fraction] of Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2020 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-RBC",
+     "display": "Eritrócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "789-8",
+       "display": "Erythrocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2021 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-MCV",
+     "display": "MCV [volume Entítico] por contagem automatizada",
+     "target": [
+      {
+       "code": "787-2",
+       "display": "MCV [Entitic volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2022 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-MCH",
+     "display": "MCH [Massa Entítica] por Contagem Automatizada",
+     "target": [
+      {
+       "code": "785-6",
+       "display": "MCH [Entitic mass] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2023 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-MCHC",
+     "display": "MCHC por contagem automatizada",
+     "target": [
+      {
+       "code": "786-4",
+       "display": "MCHC [Mass/volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2024 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-WBC",
+     "display": "Leucócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "6690-2",
+       "display": "Leukocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2026 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-NEU",
+     "display": "Neutrófilos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "751-8",
+       "display": "Neutrophils  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2027 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-LYM",
+     "display": "Linfócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "731-0",
+       "display": "Lymphocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2028 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "B-PLT",
+     "display": "Plaquetas  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "777-3",
+       "display": "Platelets  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2032 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "S-GLU",
+     "display": "Glucose em jejum no soro ou plasma",
+     "target": [
+      {
+       "code": "1558-6",
+       "display": "Fasting glucose [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 469 (SNS 22076)"
+      }
+     ]
+    },
+    {
+     "code": "S-CREA",
+     "display": "Creatinina no soro ou plasma",
+     "target": [
+      {
+       "code": "2160-0",
+       "display": "Creatinine [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 232 (SNS 21620)"
+      }
+     ]
+    },
+    {
+     "code": "S-NA",
+     "display": "Sódio no soro ou plasma",
+     "target": [
+      {
+       "code": "2951-2",
+       "display": "Sodium [Moles/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 972 (SNS 22793)"
+      }
+     ]
+    },
+    {
+     "code": "S-K",
+     "display": "Potássio  no soro ou plasma",
+     "target": [
+      {
+       "code": "2823-3",
+       "display": "Potassium  in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 826 (SNS 22617)"
+      }
+     ]
+    },
+    {
+     "code": "S-TSH",
+     "display": "Hormona tiroestimulante (TSH) no soro ou plasma",
+     "target": [
+      {
+       "code": "3016-3",
+       "display": "Thyrotropin [Units/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 538 (SNS 22253)"
+      }
+     ]
+    },
+    {
+     "code": "S-CRP",
+     "display": "Proteína C reactiva no soro ou plasma",
+     "target": [
+      {
+       "code": "1988-5",
+       "display": "C reactive protein [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 841 (SNS 22669)"
+      }
+     ]
+    },
+    {
+     "code": "B-ABO",
+     "display": "Tipo grupo AB0 no sangue",
+     "target": [
+      {
+       "code": "883-9",
+       "display": "ABO group [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5724 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "B-RH",
+     "display": "Fator Rhesus",
+     "target": [
+      {
+       "code": "10331-7",
+       "display": "Rh [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5725 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "S-HIV",
+     "display": "VIH1 e VIH2 screening no soro ou plasma, teste rápido/imunoensaio",
+     "target": [
+      {
+       "code": "69668-2",
+       "display": "HIV 1 and 2 Ab [Identifier] in Serum or Plasma by Rapid immunoassay",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5233 (SNS 26006)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisb-result-value",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "A",
+     "display": "Grupo de Sangue Tipo A",
+     "target": [
+      {
+       "code": "112144000",
+       "display": "Blood group A",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "B",
+     "display": "Grupo de Sangue Tipo B",
+     "target": [
+      {
+       "code": "112149005",
+       "display": "Blood group B",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "AB",
+     "display": "Grupo de Sangue Tipo AB",
+     "target": [
+      {
+       "code": "165743006",
+       "display": "Blood group AB",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "O",
+     "display": "Grupo de Sangue Tipo O",
+     "target": [
+      {
+       "code": "58460004",
+       "display": "Blood group O",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "POS",
+     "display": "RhD positivo",
+     "target": [
+      {
+       "code": "165747007",
+       "display": "RhD positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "NEG",
+     "display": "RhD negativo",
+     "target": [
+      {
+       "code": "165746003",
+       "display": "RhD negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "NR",
+     "display": "Negativo",
+     "target": [
+      {
+       "code": "260385009",
+       "display": "Negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "R",
+     "display": "Positivo",
+     "target": [
+      {
+       "code": "10828004",
+       "display": "Positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisb-test",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "T-HEMOG",
+     "display": "Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s",
+     "target": [
+      {
+       "code": "9564003",
+       "display": "Complete blood count with white cell differential, automated (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24209: Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s"
+      }
+     ]
+    },
+    {
+     "code": "T-GLU",
+     "display": "Glucose, doseamento, s/u/l",
+     "target": [
+      {
+       "code": "36048009",
+       "display": "Glucose measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22076: Glucose, doseamento, s/u/l"
+      }
+     ]
+    },
+    {
+     "code": "T-CREA",
+     "display": "Creatinina, s/u",
+     "target": [
+      {
+       "code": "70901006",
+       "display": "Creatinine measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21620: Creatinina, s/u"
+      }
+     ]
+    },
+    {
+     "code": "T-NA",
+     "display": "Sódio, s/u",
+     "target": [
+      {
+       "code": "25197003",
+       "display": "Sodium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22793: Sódio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "T-K",
+     "display": "Potássio, s/u",
+     "target": [
+      {
+       "code": "59573005",
+       "display": "Potassium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22617: Potássio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "T-TSH",
+     "display": "Hormona tirostimulante (TSH), s",
+     "target": [
+      {
+       "code": "61167004",
+       "display": "Thyroid stimulating hormone measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22253: Hormona tirostimulante (TSH), s"
+      }
+     ]
+    },
+    {
+     "code": "T-CRP",
+     "display": "Proteína C reativa, s",
+     "target": [
+      {
+       "code": "55235003",
+       "display": "C-reactive protein measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22669: Proteína C reativa, s"
+      }
+     ]
+    },
+    {
+     "code": "T-ABORH",
+     "display": "Tipagem AB0 e Rh (D)",
+     "target": [
+      {
+       "code": "81228005",
+       "display": "ABO and Rho(D) typing (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 55010: Tipagem AB0 e Rh (D)"
+      }
+     ]
+    },
+    {
+     "code": "T-HIV",
+     "display": "Anticorpos para VIH 1 e 2 (inclui confirmação)",
+     "target": [
+      {
+       "code": "359796005",
+       "display": "Measurement of both Human immunodeficiency virus 1 antibody and Human immunodeficiency virus 2 antibody (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26006: Anticorpos para VIH 1 e 2 (inclui confirmação)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisb-unit",
+   "target": "http://unitsofmeasure.org",
+   "element": [
+    {
+     "code": "g/dl",
+     "display": "g/dl",
+     "target": [
+      {
+       "code": "g/dL",
+       "display": "g/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: g/dL"
+      }
+     ]
+    },
+    {
+     "code": "%",
+     "display": "%",
+     "target": [
+      {
+       "code": "%",
+       "display": "%",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: %, L/L"
+      }
+     ]
+    },
+    {
+     "code": "10^6/ul",
+     "display": "10^6/ul",
+     "target": [
+      {
+       "code": "10*6/uL",
+       "display": "10*6/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*6/uL"
+      }
+     ]
+    },
+    {
+     "code": "fl",
+     "display": "fl",
+     "target": [
+      {
+       "code": "fL",
+       "display": "fL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: fL"
+      }
+     ]
+    },
+    {
+     "code": "pg",
+     "display": "pg",
+     "target": [
+      {
+       "code": "pg",
+       "display": "pg",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: pg"
+      }
+     ]
+    },
+    {
+     "code": "10^9/L",
+     "display": "10^9/L",
+     "target": [
+      {
+       "code": "10*9/L",
+       "display": "10*9/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*3/uL, 10*9/L"
+      }
+     ]
+    },
+    {
+     "code": "mg/dl",
+     "display": "mg/dl",
+     "target": [
+      {
+       "code": "mg/dL",
+       "display": "mg/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/dL"
+      }
+     ]
+    },
+    {
+     "code": "mmol/l",
+     "display": "mmol/l",
+     "target": [
+      {
+       "code": "mmol/L",
+       "display": "mmol/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mmol/L"
+      }
+     ]
+    },
+    {
+     "code": "mU/L",
+     "display": "mU/L",
+     "target": [
+      {
+       "code": "m[IU]/L",
+       "display": "m[IU]/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: m[IU]/L, u[IU]/mL"
+      }
+     ]
+    },
+    {
+     "code": "mg/l",
+     "display": "mg/l",
+     "target": [
+      {
+       "code": "mg/L",
+       "display": "mg/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/L, mg/dL"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisc-observation",
+   "target": "http://loinc.org",
+   "element": [
+    {
+     "code": "HGB",
+     "display": "Hemoglobina no sangue",
+     "target": [
+      {
+       "code": "718-7",
+       "display": "Hemoglobin [Mass/volume] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2019 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "HCT",
+     "display": "Hematócrito  de Sangue por Contagem Automatizada",
+     "target": [
+      {
+       "code": "4544-3",
+       "display": "Hematocrit [Volume Fraction] of Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2020 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "RBC",
+     "display": "Eritrócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "789-8",
+       "display": "Erythrocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2021 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "MCV",
+     "display": "MCV [volume Entítico] por contagem automatizada",
+     "target": [
+      {
+       "code": "787-2",
+       "display": "MCV [Entitic volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2022 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "MCH",
+     "display": "MCH [Massa Entítica] por Contagem Automatizada",
+     "target": [
+      {
+       "code": "785-6",
+       "display": "MCH [Entitic mass] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2023 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "MCHC",
+     "display": "MCHC por contagem automatizada",
+     "target": [
+      {
+       "code": "786-4",
+       "display": "MCHC [Mass/volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2024 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "WBC",
+     "display": "Leucócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "6690-2",
+       "display": "Leukocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2026 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "NEUT",
+     "display": "Neutrófilos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "751-8",
+       "display": "Neutrophils  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2027 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "LYMPH",
+     "display": "Linfócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "731-0",
+       "display": "Lymphocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2028 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "PLT",
+     "display": "Plaquetas  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "777-3",
+       "display": "Platelets  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2032 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "GLU",
+     "display": "Glucose em jejum no soro ou plasma",
+     "target": [
+      {
+       "code": "1558-6",
+       "display": "Fasting glucose [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 469 (SNS 22076)"
+      }
+     ]
+    },
+    {
+     "code": "PSA",
+     "display": "Antigénio específico da próstata (PSA) total no soro ou plasma",
+     "target": [
+      {
+       "code": "2857-1",
+       "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 106 (SNS 21261)"
+      }
+     ]
+    },
+    {
+     "code": "CHOL",
+     "display": "Colesterol no soro ou plasma",
+     "target": [
+      {
+       "code": "2093-3",
+       "display": "Cholesterol [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 216 (SNS 21554)"
+      }
+     ]
+    },
+    {
+     "code": "HDL",
+     "display": "Colesterol em HDL no soro ou plasma",
+     "target": [
+      {
+       "code": "2085-9",
+       "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 210 (SNS 21539)"
+      }
+     ]
+    },
+    {
+     "code": "LDL",
+     "display": "Colesterol em LDL no soro ou plasma",
+     "target": [
+      {
+       "code": "2089-1",
+       "display": "Cholesterol in LDL [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 211 (SNS 21545)"
+      }
+     ]
+    },
+    {
+     "code": "TRIG",
+     "display": "Triglicerídeos no soro ou plasma",
+     "target": [
+      {
+       "code": "2571-8",
+       "display": "Triglyceride [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 990 (SNS 22920)"
+      }
+     ]
+    },
+    {
+     "code": "CREA",
+     "display": "Creatinina no soro ou plasma",
+     "target": [
+      {
+       "code": "2160-0",
+       "display": "Creatinine [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 232 (SNS 21620)"
+      }
+     ]
+    },
+    {
+     "code": "UREA",
+     "display": "Ureia no soro ou plasma",
+     "target": [
+      {
+       "code": "3091-6",
+       "display": "Urea [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 996 (SNS 22949)"
+      }
+     ]
+    },
+    {
+     "code": "NA",
+     "display": "Sódio no soro ou plasma",
+     "target": [
+      {
+       "code": "2951-2",
+       "display": "Sodium [Moles/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 972 (SNS 22793)"
+      }
+     ]
+    },
+    {
+     "code": "K",
+     "display": "Potássio  no soro ou plasma",
+     "target": [
+      {
+       "code": "2823-3",
+       "display": "Potassium  in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 826 (SNS 22617)"
+      }
+     ]
+    },
+    {
+     "code": "TSH",
+     "display": "Hormona tiroestimulante (TSH) no soro ou plasma",
+     "target": [
+      {
+       "code": "3016-3",
+       "display": "Thyrotropin [Units/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 538 (SNS 22253)"
+      }
+     ]
+    },
+    {
+     "code": "A1C",
+     "display": "Hemoglobina A1c (glicada), no sangue",
+     "target": [
+      {
+       "code": "4548-4",
+       "display": "Hemoglobin A1c/Hemoglobin.total in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 497 (SNS 22151)"
+      }
+     ]
+    },
+    {
+     "code": "CRP",
+     "display": "Proteína C reactiva no soro ou plasma",
+     "target": [
+      {
+       "code": "1988-5",
+       "display": "C reactive protein [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 841 (SNS 22669)"
+      }
+     ]
+    },
+    {
+     "code": "ALT",
+     "display": "Aminotransferase da alanina no soro ou plasma",
+     "target": [
+      {
+       "code": "1742-6",
+       "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 96 (SNS 21217)"
+      }
+     ]
+    },
+    {
+     "code": "AST",
+     "display": "Aminotransferase do aspartato no soro ou plasma",
+     "target": [
+      {
+       "code": "1920-8",
+       "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 97 (SNS 21220)"
+      }
+     ]
+    },
+    {
+     "code": "PRL",
+     "display": "Prolactina no soro ou plasma",
+     "target": [
+      {
+       "code": "2842-3",
+       "display": "Prolactin [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 831 (SNS 22647)"
+      }
+     ]
+    },
+    {
+     "code": "INR",
+     "display": "Tempo de protrombina, INR, sangue",
+     "target": [
+      {
+       "code": "6301-6",
+       "display": "INR in Platelet poor plasma by Coagulation assay",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2094 (SNS 24347)"
+      }
+     ]
+    },
+    {
+     "code": "FERR",
+     "display": "Ferritina no soro ou plasma",
+     "target": [
+      {
+       "code": "2276-4",
+       "display": "Ferritin [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 394 (SNS 21895)"
+      }
+     ]
+    },
+    {
+     "code": "ABO",
+     "display": "Tipo grupo AB0 no sangue",
+     "target": [
+      {
+       "code": "883-9",
+       "display": "ABO group [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5724 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "RH",
+     "display": "Fator Rhesus",
+     "target": [
+      {
+       "code": "10331-7",
+       "display": "Rh [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5725 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "EPI",
+     "display": "Presença de Células epiteliais no sedimento urinário por microscopia ótica",
+     "target": [
+      {
+       "code": "20453-7",
+       "display": "Epithelial cells [Presence] in Urine sediment by Light microscopy",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5584 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "WBCU",
+     "display": "Leucócitos na urina",
+     "target": [
+      {
+       "code": "30405-5",
+       "display": "Leukocytes  in Urine",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5585 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "ORG",
+     "display": "Bactéria identificada na urocultura",
+     "target": [
+      {
+       "code": "630-4",
+       "display": "Bacteria identified in Urine by Culture",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5568 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "HIV",
+     "display": "VIH1 e VIH2 screening no soro ou plasma, teste rápido/imunoensaio",
+     "target": [
+      {
+       "code": "69668-2",
+       "display": "HIV 1 and 2 Ab [Identifier] in Serum or Plasma by Rapid immunoassay",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5233 (SNS 26006)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisc-result-value",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "A",
+     "display": "Grupo de Sangue Tipo A",
+     "target": [
+      {
+       "code": "112144000",
+       "display": "Blood group A",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "B",
+     "display": "Grupo de Sangue Tipo B",
+     "target": [
+      {
+       "code": "112149005",
+       "display": "Blood group B",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "AB",
+     "display": "Grupo de Sangue Tipo AB",
+     "target": [
+      {
+       "code": "165743006",
+       "display": "Blood group AB",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "O",
+     "display": "Grupo de Sangue Tipo O",
+     "target": [
+      {
+       "code": "58460004",
+       "display": "Blood group O",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "RHPOS",
+     "display": "RhD positivo",
+     "target": [
+      {
+       "code": "165747007",
+       "display": "RhD positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "RHNEG",
+     "display": "RhD negativo",
+     "target": [
+      {
+       "code": "165746003",
+       "display": "RhD negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "PRES",
+     "display": "Presente",
+     "target": [
+      {
+       "code": "52101004",
+       "display": "Present",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "ABS",
+     "display": "Ausente",
+     "target": [
+      {
+       "code": "2667000",
+       "display": "Absent",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "NEG",
+     "display": "Negativo",
+     "target": [
+      {
+       "code": "260385009",
+       "display": "Negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "POS",
+     "display": "Positivo",
+     "target": [
+      {
+       "code": "10828004",
+       "display": "Positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "ECO",
+     "display": "Escherichia coli",
+     "target": [
+      {
+       "code": "112283007",
+       "display": "Escherichia coli",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "KPN",
+     "display": "Klebsiella pneumoniae",
+     "target": [
+      {
+       "code": "56415008",
+       "display": "Klebsiella pneumoniae",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "EFA",
+     "display": "Enterococcus faecalis",
+     "target": [
+      {
+       "code": "78065002",
+       "display": "Enterococcus faecalis",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "PMI",
+     "display": "Proteus mirabilis",
+     "target": [
+      {
+       "code": "73457008",
+       "display": "Proteus mirabilis",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "NG",
+     "display": "Não detetado",
+     "target": [
+      {
+       "code": "260415000",
+       "display": "Not detected",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisc-test",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "CBC",
+     "display": "Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s",
+     "target": [
+      {
+       "code": "9564003",
+       "display": "Complete blood count with white cell differential, automated (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24209: Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s"
+      }
+     ]
+    },
+    {
+     "code": "GLU",
+     "display": "Glucose, doseamento, s/u/l",
+     "target": [
+      {
+       "code": "36048009",
+       "display": "Glucose measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22076: Glucose, doseamento, s/u/l"
+      }
+     ]
+    },
+    {
+     "code": "PSA",
+     "display": "Antigénio específico da próstata (PSA) total, s",
+     "target": [
+      {
+       "code": "63476009",
+       "display": "Prostate specific antigen measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21261: Antigénio específico da próstata (PSA) total, s"
+      }
+     ]
+    },
+    {
+     "code": "CHOL",
+     "display": "Colesterol total, s/l",
+     "target": [
+      {
+       "code": "121868005",
+       "display": "Total cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21554: Colesterol total, s/l"
+      }
+     ]
+    },
+    {
+     "code": "HDL",
+     "display": "Colesterol da fração HDL, s",
+     "target": [
+      {
+       "code": "28036006",
+       "display": "High density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21539: Colesterol da fração HDL, s"
+      }
+     ]
+    },
+    {
+     "code": "LDL",
+     "display": "Colesterol da fração LDL, s",
+     "target": [
+      {
+       "code": "113079009",
+       "display": "Low density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21545: Colesterol da fração LDL, s"
+      }
+     ]
+    },
+    {
+     "code": "TRIG",
+     "display": "Triglicéridos, s/u/l",
+     "target": [
+      {
+       "code": "14740000",
+       "display": "Triglycerides measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22920: Triglicéridos, s/u/l"
+      }
+     ]
+    },
+    {
+     "code": "CREA",
+     "display": "Creatinina, s/u",
+     "target": [
+      {
+       "code": "70901006",
+       "display": "Creatinine measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21620: Creatinina, s/u"
+      }
+     ]
+    },
+    {
+     "code": "UREA",
+     "display": "Ureia, s/u",
+     "target": [
+      {
+       "code": "105010007",
+       "display": "Urea measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22949: Ureia, s/u"
+      }
+     ]
+    },
+    {
+     "code": "NA",
+     "display": "Sódio, s/u",
+     "target": [
+      {
+       "code": "25197003",
+       "display": "Sodium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22793: Sódio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "K",
+     "display": "Potássio, s/u",
+     "target": [
+      {
+       "code": "59573005",
+       "display": "Potassium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22617: Potássio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "TSH",
+     "display": "Hormona tirostimulante (TSH), s",
+     "target": [
+      {
+       "code": "61167004",
+       "display": "Thyroid stimulating hormone measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22253: Hormona tirostimulante (TSH), s"
+      }
+     ]
+    },
+    {
+     "code": "A1C",
+     "display": "Hemoglobina A1c (glicada)",
+     "target": [
+      {
+       "code": "43396009",
+       "display": "Hemoglobin A1c measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22151: Hemoglobina A1c (glicada)"
+      }
+     ]
+    },
+    {
+     "code": "CRP",
+     "display": "Proteína C reativa, s",
+     "target": [
+      {
+       "code": "55235003",
+       "display": "C-reactive protein measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22669: Proteína C reativa, s"
+      }
+     ]
+    },
+    {
+     "code": "ALT",
+     "display": "Aminotransferase da alanina (ALT), s",
+     "target": [
+      {
+       "code": "34608000",
+       "display": "Alanine aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21217: Aminotransferase da alanina (ALT), s"
+      }
+     ]
+    },
+    {
+     "code": "AST",
+     "display": "Aminotransferase do aspartato (AST), s",
+     "target": [
+      {
+       "code": "45896001",
+       "display": "Aspartate aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21220: Aminotransferase do aspartato (AST), s"
+      }
+     ]
+    },
+    {
+     "code": "PRL",
+     "display": "Prolactina (PRL), s",
+     "target": [
+      {
+       "code": "113083009",
+       "display": "Prolactin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22647: Prolactina (PRL), s"
+      }
+     ]
+    },
+    {
+     "code": "INR",
+     "display": "Tempo de protrombina (TP, Quick, INR)",
+     "target": [
+      {
+       "code": "396451008",
+       "display": "Prothrombin time (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24347: Tempo de protrombina (TP, Quick, INR)"
+      }
+     ]
+    },
+    {
+     "code": "FERR",
+     "display": "Ferritina, s",
+     "target": [
+      {
+       "code": "489004",
+       "display": "Ferritin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21895: Ferritina, s"
+      }
+     ]
+    },
+    {
+     "code": "ABORH",
+     "display": "Tipagem AB0 e Rh (D)",
+     "target": [
+      {
+       "code": "81228005",
+       "display": "ABO and Rho(D) typing (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 55010: Tipagem AB0 e Rh (D)"
+      }
+     ]
+    },
+    {
+     "code": "UCULT",
+     "display": "Urina - exame direto, cultural, identificação e TSA (Urocultura)",
+     "target": [
+      {
+       "code": "117010004",
+       "display": "Urine culture (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26498: Urina - exame direto, cultural, identificação e TSA (Urocultura)"
+      }
+     ]
+    },
+    {
+     "code": "HIV",
+     "display": "Anticorpos para VIH 1 e 2 (inclui confirmação)",
+     "target": [
+      {
+       "code": "359796005",
+       "display": "Measurement of both Human immunodeficiency virus 1 antibody and Human immunodeficiency virus 2 antibody (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26006: Anticorpos para VIH 1 e 2 (inclui confirmação)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/lisc-unit",
+   "target": "http://unitsofmeasure.org",
+   "element": [
+    {
+     "code": "g/dL",
+     "display": "g/dL",
+     "target": [
+      {
+       "code": "g/dL",
+       "display": "g/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: g/dL"
+      }
+     ]
+    },
+    {
+     "code": "%",
+     "display": "%",
+     "target": [
+      {
+       "code": "%",
+       "display": "%",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: %, L/L"
+      }
+     ]
+    },
+    {
+     "code": "10*6/uL",
+     "display": "10*6/uL",
+     "target": [
+      {
+       "code": "10*6/uL",
+       "display": "10*6/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*6/uL"
+      }
+     ]
+    },
+    {
+     "code": "fL",
+     "display": "fL",
+     "target": [
+      {
+       "code": "fL",
+       "display": "fL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: fL"
+      }
+     ]
+    },
+    {
+     "code": "pg",
+     "display": "pg",
+     "target": [
+      {
+       "code": "pg",
+       "display": "pg",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: pg"
+      }
+     ]
+    },
+    {
+     "code": "10*3/uL",
+     "display": "10*3/uL",
+     "target": [
+      {
+       "code": "10*3/uL",
+       "display": "10*3/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*3/uL, 10*9/L"
+      }
+     ]
+    },
+    {
+     "code": "mg/dL",
+     "display": "mg/dL",
+     "target": [
+      {
+       "code": "mg/dL",
+       "display": "mg/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/dL"
+      }
+     ]
+    },
+    {
+     "code": "ng/mL",
+     "display": "ng/mL",
+     "target": [
+      {
+       "code": "ng/mL",
+       "display": "ng/mL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: ng/mL"
+      }
+     ]
+    },
+    {
+     "code": "mmol/L",
+     "display": "mmol/L",
+     "target": [
+      {
+       "code": "mmol/L",
+       "display": "mmol/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mmol/L"
+      }
+     ]
+    },
+    {
+     "code": "m[IU]/L",
+     "display": "m[IU]/L",
+     "target": [
+      {
+       "code": "m[IU]/L",
+       "display": "m[IU]/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: m[IU]/L, u[IU]/mL"
+      }
+     ]
+    },
+    {
+     "code": "mg/L",
+     "display": "mg/L",
+     "target": [
+      {
+       "code": "mg/L",
+       "display": "mg/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/L, mg/dL"
+      }
+     ]
+    },
+    {
+     "code": "U/L",
+     "display": "U/L",
+     "target": [
+      {
+       "code": "U/L",
+       "display": "U/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: U/L"
+      }
+     ]
+    },
+    {
+     "code": "{INR}",
+     "display": "{INR}",
+     "target": [
+      {
+       "code": "{INR}",
+       "display": "{INR}",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: {INR}"
+      }
+     ]
+    },
+    {
+     "code": "/uL",
+     "display": "/uL",
+     "target": [
+      {
+       "code": "/uL",
+       "display": "/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: /uL"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/pt-conv-mcdt",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "A1080.9",
+     "display": "Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s",
+     "target": [
+      {
+       "code": "9564003",
+       "display": "Complete blood count with white cell differential, automated (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24209: Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s; convention code 1080.9, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1270.4",
+     "display": "Glucose, doseamento, s/u/l",
+     "target": [
+      {
+       "code": "36048009",
+       "display": "Glucose measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22076: Glucose, doseamento, s/u/l; convention code 1270.4, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1017.5",
+     "display": "Antigénio específico da próstata (PSA) total, s",
+     "target": [
+      {
+       "code": "63476009",
+       "display": "Prostate specific antigen measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21261: Antigénio específico da próstata (PSA) total, s; convention code 1017.5, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1029.9",
+     "display": "Colesterol total, s/l",
+     "target": [
+      {
+       "code": "121868005",
+       "display": "Total cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21554: Colesterol total, s/l; convention code 1029.9, area A"
+      }
+     ]
+    },
+    {
+     "code": "A412.0",
+     "display": "Colesterol da fração HDL, s",
+     "target": [
+      {
+       "code": "28036006",
+       "display": "High density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21539: Colesterol da fração HDL, s; convention code 412.0, area A"
+      }
+     ]
+    },
+    {
+     "code": "A542.8",
+     "display": "Colesterol da fração LDL, s",
+     "target": [
+      {
+       "code": "113079009",
+       "display": "Low density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21545: Colesterol da fração LDL, s; convention code 542.8, area A"
+      }
+     ]
+    },
+    {
+     "code": "A620.3",
+     "display": "Triglicéridos, s/u/l",
+     "target": [
+      {
+       "code": "14740000",
+       "display": "Triglycerides measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22920: Triglicéridos, s/u/l; convention code 620.3, area A"
+      }
+     ]
+    },
+    {
+     "code": "A427.8",
+     "display": "Creatinina, s/u",
+     "target": [
+      {
+       "code": "70901006",
+       "display": "Creatinine measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21620: Creatinina, s/u; convention code 427.8, area A"
+      }
+     ]
+    },
+    {
+     "code": "A625.4",
+     "display": "Ureia, s/u",
+     "target": [
+      {
+       "code": "105010007",
+       "display": "Urea measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22949: Ureia, s/u; convention code 625.4, area A"
+      }
+     ]
+    },
+    {
+     "code": "A616.5",
+     "display": "Sódio, s/u",
+     "target": [
+      {
+       "code": "25197003",
+       "display": "Sodium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22793: Sódio, s/u; convention code 616.5, area A"
+      }
+     ]
+    },
+    {
+     "code": "A591.6",
+     "display": "Potássio, s/u",
+     "target": [
+      {
+       "code": "59573005",
+       "display": "Potassium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22617: Potássio, s/u; convention code 591.6, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1053.1",
+     "display": "Hormona tirostimulante (TSH), s",
+     "target": [
+      {
+       "code": "61167004",
+       "display": "Thyroid stimulating hormone measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22253: Hormona tirostimulante (TSH), s; convention code 1053.1, area A"
+      }
+     ]
+    },
+    {
+     "code": "A531.2",
+     "display": "Hemoglobina A1c (glicada)",
+     "target": [
+      {
+       "code": "43396009",
+       "display": "Hemoglobin A1c measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22151: Hemoglobina A1c (glicada); convention code 531.2, area A"
+      }
+     ]
+    },
+    {
+     "code": "A291.7",
+     "display": "Proteína C reativa, s",
+     "target": [
+      {
+       "code": "55235003",
+       "display": "C-reactive protein measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22669: Proteína C reativa, s; convention code 291.7, area A"
+      }
+     ]
+    },
+    {
+     "code": "A524.0",
+     "display": "Aminotransferase da alanina (ALT), s",
+     "target": [
+      {
+       "code": "34608000",
+       "display": "Alanine aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21217: Aminotransferase da alanina (ALT), s; convention code 524.0, area A"
+      }
+     ]
+    },
+    {
+     "code": "A523.1",
+     "display": "Aminotransferase do aspartato (AST), s",
+     "target": [
+      {
+       "code": "45896001",
+       "display": "Aspartate aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21220: Aminotransferase do aspartato (AST), s; convention code 523.1, area A"
+      }
+     ]
+    },
+    {
+     "code": "A697.1",
+     "display": "Prolactina (PRL), s",
+     "target": [
+      {
+       "code": "113083009",
+       "display": "Prolactin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22647: Prolactina (PRL), s; convention code 697.1, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1086.8",
+     "display": "Tempo de protrombina (TP, Quick, INR)",
+     "target": [
+      {
+       "code": "396451008",
+       "display": "Prothrombin time (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24347: Tempo de protrombina (TP, Quick, INR); convention code 1086.8, area A"
+      }
+     ]
+    },
+    {
+     "code": "A483.9",
+     "display": "Ferritina, s",
+     "target": [
+      {
+       "code": "489004",
+       "display": "Ferritin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21895: Ferritina, s; convention code 483.9, area A"
+      }
+     ]
+    },
+    {
+     "code": "A079.5",
+     "display": "Tipagem AB0 e Rh (D)",
+     "target": [
+      {
+       "code": "81228005",
+       "display": "ABO and Rho(D) typing (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 55010: Tipagem AB0 e Rh (D); convention code 079.5, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1265.8",
+     "display": "Urina - exame direto, cultural, identificação e TSA (Urocultura)",
+     "target": [
+      {
+       "code": "117010004",
+       "display": "Urine culture (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26498: Urina - exame direto, cultural, identificação e TSA (Urocultura); convention code 1265.8, area A"
+      }
+     ]
+    },
+    {
+     "code": "A1308.5",
+     "display": "Anticorpos para VIH 1 e 2 (inclui confirmação)",
+     "target": [
+      {
+       "code": "359796005",
+       "display": "Measurement of both Human immunodeficiency virus 1 antibody and Human immunodeficiency virus 2 antibody (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26006: Anticorpos para VIH 1 e 2 (inclui confirmação); convention code 1308.5, area A"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/pt-sns-mcdt",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "24209",
+     "display": "Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s",
+     "target": [
+      {
+       "code": "9564003",
+       "display": "Complete blood count with white cell differential, automated (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24209: Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s"
+      }
+     ]
+    },
+    {
+     "code": "22076",
+     "display": "Glucose, doseamento, s/u/l",
+     "target": [
+      {
+       "code": "36048009",
+       "display": "Glucose measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22076: Glucose, doseamento, s/u/l"
+      }
+     ]
+    },
+    {
+     "code": "21261",
+     "display": "Antigénio específico da próstata (PSA) total, s",
+     "target": [
+      {
+       "code": "63476009",
+       "display": "Prostate specific antigen measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21261: Antigénio específico da próstata (PSA) total, s"
+      }
+     ]
+    },
+    {
+     "code": "21554",
+     "display": "Colesterol total, s/l",
+     "target": [
+      {
+       "code": "121868005",
+       "display": "Total cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21554: Colesterol total, s/l"
+      }
+     ]
+    },
+    {
+     "code": "21539",
+     "display": "Colesterol da fração HDL, s",
+     "target": [
+      {
+       "code": "28036006",
+       "display": "High density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21539: Colesterol da fração HDL, s"
+      }
+     ]
+    },
+    {
+     "code": "21545",
+     "display": "Colesterol da fração LDL, s",
+     "target": [
+      {
+       "code": "113079009",
+       "display": "Low density lipoprotein cholesterol measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21545: Colesterol da fração LDL, s"
+      }
+     ]
+    },
+    {
+     "code": "22920",
+     "display": "Triglicéridos, s/u/l",
+     "target": [
+      {
+       "code": "14740000",
+       "display": "Triglycerides measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22920: Triglicéridos, s/u/l"
+      }
+     ]
+    },
+    {
+     "code": "21620",
+     "display": "Creatinina, s/u",
+     "target": [
+      {
+       "code": "70901006",
+       "display": "Creatinine measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21620: Creatinina, s/u"
+      }
+     ]
+    },
+    {
+     "code": "22949",
+     "display": "Ureia, s/u",
+     "target": [
+      {
+       "code": "105010007",
+       "display": "Urea measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22949: Ureia, s/u"
+      }
+     ]
+    },
+    {
+     "code": "22793",
+     "display": "Sódio, s/u",
+     "target": [
+      {
+       "code": "25197003",
+       "display": "Sodium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22793: Sódio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "22617",
+     "display": "Potássio, s/u",
+     "target": [
+      {
+       "code": "59573005",
+       "display": "Potassium measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22617: Potássio, s/u"
+      }
+     ]
+    },
+    {
+     "code": "22253",
+     "display": "Hormona tirostimulante (TSH), s",
+     "target": [
+      {
+       "code": "61167004",
+       "display": "Thyroid stimulating hormone measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22253: Hormona tirostimulante (TSH), s"
+      }
+     ]
+    },
+    {
+     "code": "22151",
+     "display": "Hemoglobina A1c (glicada)",
+     "target": [
+      {
+       "code": "43396009",
+       "display": "Hemoglobin A1c measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22151: Hemoglobina A1c (glicada)"
+      }
+     ]
+    },
+    {
+     "code": "22669",
+     "display": "Proteína C reativa, s",
+     "target": [
+      {
+       "code": "55235003",
+       "display": "C-reactive protein measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22669: Proteína C reativa, s"
+      }
+     ]
+    },
+    {
+     "code": "21217",
+     "display": "Aminotransferase da alanina (ALT), s",
+     "target": [
+      {
+       "code": "34608000",
+       "display": "Alanine aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21217: Aminotransferase da alanina (ALT), s"
+      }
+     ]
+    },
+    {
+     "code": "21220",
+     "display": "Aminotransferase do aspartato (AST), s",
+     "target": [
+      {
+       "code": "45896001",
+       "display": "Aspartate aminotransferase measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21220: Aminotransferase do aspartato (AST), s"
+      }
+     ]
+    },
+    {
+     "code": "22647",
+     "display": "Prolactina (PRL), s",
+     "target": [
+      {
+       "code": "113083009",
+       "display": "Prolactin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 22647: Prolactina (PRL), s"
+      }
+     ]
+    },
+    {
+     "code": "24347",
+     "display": "Tempo de protrombina (TP, Quick, INR)",
+     "target": [
+      {
+       "code": "396451008",
+       "display": "Prothrombin time (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 24347: Tempo de protrombina (TP, Quick, INR)"
+      }
+     ]
+    },
+    {
+     "code": "21895",
+     "display": "Ferritina, s",
+     "target": [
+      {
+       "code": "489004",
+       "display": "Ferritin measurement (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 21895: Ferritina, s"
+      }
+     ]
+    },
+    {
+     "code": "55010",
+     "display": "Tipagem AB0 e Rh (D)",
+     "target": [
+      {
+       "code": "81228005",
+       "display": "ABO and Rho(D) typing (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 55010: Tipagem AB0 e Rh (D)"
+      }
+     ]
+    },
+    {
+     "code": "26498",
+     "display": "Urina - exame direto, cultural, identificação e TSA (Urocultura)",
+     "target": [
+      {
+       "code": "117010004",
+       "display": "Urine culture (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26498: Urina - exame direto, cultural, identificação e TSA (Urocultura)"
+      }
+     ]
+    },
+    {
+     "code": "26006",
+     "display": "Anticorpos para VIH 1 e 2 (inclui confirmação)",
+     "target": [
+      {
+       "code": "359796005",
+       "display": "Measurement of both Human immunodeficiency virus 1 antibody and Human immunodeficiency virus 2 antibody (procedure)",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, SNS 26006: Anticorpos para VIH 1 e 2 (inclui confirmação)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/sil-parameter",
+   "target": "http://loinc.org",
+   "element": [
+    {
+     "code": "HGB",
+     "display": "Hemoglobina no sangue",
+     "target": [
+      {
+       "code": "718-7",
+       "display": "Hemoglobin [Mass/volume] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2019 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "HCT",
+     "display": "Hematócrito  de Sangue por Contagem Automatizada",
+     "target": [
+      {
+       "code": "4544-3",
+       "display": "Hematocrit [Volume Fraction] of Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2020 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "RBC",
+     "display": "Eritrócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "789-8",
+       "display": "Erythrocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2021 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "VGM",
+     "display": "MCV [volume Entítico] por contagem automatizada",
+     "target": [
+      {
+       "code": "787-2",
+       "display": "MCV [Entitic volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2022 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "HGM",
+     "display": "MCH [Massa Entítica] por Contagem Automatizada",
+     "target": [
+      {
+       "code": "785-6",
+       "display": "MCH [Entitic mass] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2023 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "CHGM",
+     "display": "MCHC por contagem automatizada",
+     "target": [
+      {
+       "code": "786-4",
+       "display": "MCHC [Mass/volume] by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2024 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "LEUC",
+     "display": "Leucócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "6690-2",
+       "display": "Leukocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2026 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "NEUT",
+     "display": "Neutrófilos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "751-8",
+       "display": "Neutrophils  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2027 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "LINF",
+     "display": "Linfócitos  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "731-0",
+       "display": "Lymphocytes  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2028 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "PLAQ",
+     "display": "Plaquetas  no sangue por contagem automatizada",
+     "target": [
+      {
+       "code": "777-3",
+       "display": "Platelets  in Blood by Automated count",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2032 (SNS 24209)"
+      }
+     ]
+    },
+    {
+     "code": "GLIJ",
+     "display": "Glucose em jejum no soro ou plasma",
+     "target": [
+      {
+       "code": "1558-6",
+       "display": "Fasting glucose [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 469 (SNS 22076)"
+      }
+     ]
+    },
+    {
+     "code": "PSAT",
+     "display": "Antigénio específico da próstata (PSA) total no soro ou plasma",
+     "target": [
+      {
+       "code": "2857-1",
+       "display": "Prostate specific Ag [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 106 (SNS 21261)"
+      }
+     ]
+    },
+    {
+     "code": "COLT",
+     "display": "Colesterol no soro ou plasma",
+     "target": [
+      {
+       "code": "2093-3",
+       "display": "Cholesterol [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 216 (SNS 21554)"
+      }
+     ]
+    },
+    {
+     "code": "CHDL",
+     "display": "Colesterol em HDL no soro ou plasma",
+     "target": [
+      {
+       "code": "2085-9",
+       "display": "Cholesterol in HDL [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 210 (SNS 21539)"
+      }
+     ]
+    },
+    {
+     "code": "CLDL",
+     "display": "Colesterol em LDL no soro ou plasma",
+     "target": [
+      {
+       "code": "2089-1",
+       "display": "Cholesterol in LDL [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 211 (SNS 21545)"
+      }
+     ]
+    },
+    {
+     "code": "TRIG",
+     "display": "Triglicerídeos no soro ou plasma",
+     "target": [
+      {
+       "code": "2571-8",
+       "display": "Triglyceride [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 990 (SNS 22920)"
+      }
+     ]
+    },
+    {
+     "code": "CREA",
+     "display": "Creatinina no soro ou plasma",
+     "target": [
+      {
+       "code": "2160-0",
+       "display": "Creatinine [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 232 (SNS 21620)"
+      }
+     ]
+    },
+    {
+     "code": "UREIA",
+     "display": "Ureia no soro ou plasma",
+     "target": [
+      {
+       "code": "3091-6",
+       "display": "Urea [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 996 (SNS 22949)"
+      }
+     ]
+    },
+    {
+     "code": "NA",
+     "display": "Sódio no soro ou plasma",
+     "target": [
+      {
+       "code": "2951-2",
+       "display": "Sodium [Moles/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 972 (SNS 22793)"
+      }
+     ]
+    },
+    {
+     "code": "K",
+     "display": "Potássio  no soro ou plasma",
+     "target": [
+      {
+       "code": "2823-3",
+       "display": "Potassium  in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 826 (SNS 22617)"
+      }
+     ]
+    },
+    {
+     "code": "TSH",
+     "display": "Hormona tiroestimulante (TSH) no soro ou plasma",
+     "target": [
+      {
+       "code": "3016-3",
+       "display": "Thyrotropin [Units/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 538 (SNS 22253)"
+      }
+     ]
+    },
+    {
+     "code": "A1C",
+     "display": "Hemoglobina A1c (glicada), no sangue",
+     "target": [
+      {
+       "code": "4548-4",
+       "display": "Hemoglobin A1c/Hemoglobin.total in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 497 (SNS 22151)"
+      }
+     ]
+    },
+    {
+     "code": "PCR",
+     "display": "Proteína C reactiva no soro ou plasma",
+     "target": [
+      {
+       "code": "1988-5",
+       "display": "C reactive protein [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 841 (SNS 22669)"
+      }
+     ]
+    },
+    {
+     "code": "ALT",
+     "display": "Aminotransferase da alanina no soro ou plasma",
+     "target": [
+      {
+       "code": "1742-6",
+       "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 96 (SNS 21217)"
+      }
+     ]
+    },
+    {
+     "code": "AST",
+     "display": "Aminotransferase do aspartato no soro ou plasma",
+     "target": [
+      {
+       "code": "1920-8",
+       "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 97 (SNS 21220)"
+      }
+     ]
+    },
+    {
+     "code": "PRL",
+     "display": "Prolactina no soro ou plasma",
+     "target": [
+      {
+       "code": "2842-3",
+       "display": "Prolactin [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 831 (SNS 22647)"
+      }
+     ]
+    },
+    {
+     "code": "INR",
+     "display": "Tempo de protrombina, INR, sangue",
+     "target": [
+      {
+       "code": "6301-6",
+       "display": "INR in Platelet poor plasma by Coagulation assay",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 2094 (SNS 24347)"
+      }
+     ]
+    },
+    {
+     "code": "FERR",
+     "display": "Ferritina no soro ou plasma",
+     "target": [
+      {
+       "code": "2276-4",
+       "display": "Ferritin [Mass/volume] in Serum or Plasma",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 394 (SNS 21895)"
+      }
+     ]
+    },
+    {
+     "code": "ABO",
+     "display": "Tipo grupo AB0 no sangue",
+     "target": [
+      {
+       "code": "883-9",
+       "display": "ABO group [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5724 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "RH",
+     "display": "Fator Rhesus",
+     "target": [
+      {
+       "code": "10331-7",
+       "display": "Rh [Type] in Blood",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5725 (SNS 55010)"
+      }
+     ]
+    },
+    {
+     "code": "EPIT",
+     "display": "Presença de Células epiteliais no sedimento urinário por microscopia ótica",
+     "target": [
+      {
+       "code": "20453-7",
+       "display": "Epithelial cells [Presence] in Urine sediment by Light microscopy",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5584 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "LEUU",
+     "display": "Leucócitos na urina",
+     "target": [
+      {
+       "code": "30405-5",
+       "display": "Leukocytes  in Urine",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5585 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "BACT",
+     "display": "Bactéria identificada na urocultura",
+     "target": [
+      {
+       "code": "630-4",
+       "display": "Bacteria identified in Urine by Culture",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5568 (SNS 26498)"
+      }
+     ]
+    },
+    {
+     "code": "VIH12",
+     "display": "VIH1 e VIH2 screening no soro ou plasma, teste rápido/imunoensaio",
+     "target": [
+      {
+       "code": "69668-2",
+       "display": "HIV 1 and 2 Ab [Identifier] in Serum or Plasma by Rapid immunoassay",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, line 5233 (SNS 26006)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/sil-result-value",
+   "target": "http://snomed.info/sct",
+   "element": [
+    {
+     "code": "A",
+     "display": "Grupo de Sangue Tipo A",
+     "target": [
+      {
+       "code": "112144000",
+       "display": "Blood group A",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "B",
+     "display": "Grupo de Sangue Tipo B",
+     "target": [
+      {
+       "code": "112149005",
+       "display": "Blood group B",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "AB",
+     "display": "Grupo de Sangue Tipo AB",
+     "target": [
+      {
+       "code": "165743006",
+       "display": "Blood group AB",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "O",
+     "display": "Grupo de Sangue Tipo O",
+     "target": [
+      {
+       "code": "58460004",
+       "display": "Blood group O",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'AB0 Group Phenotype'"
+      }
+     ]
+    },
+    {
+     "code": "RH+",
+     "display": "RhD positivo",
+     "target": [
+      {
+       "code": "165747007",
+       "display": "RhD positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "RH-",
+     "display": "RhD negativo",
+     "target": [
+      {
+       "code": "165746003",
+       "display": "RhD negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Rhesus Factor'"
+      }
+     ]
+    },
+    {
+     "code": "PRES",
+     "display": "Presente",
+     "target": [
+      {
+       "code": "52101004",
+       "display": "Present",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "AUS",
+     "display": "Ausente",
+     "target": [
+      {
+       "code": "2667000",
+       "display": "Absent",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "NEG",
+     "display": "Negativo",
+     "target": [
+      {
+       "code": "260385009",
+       "display": "Negative",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "POS",
+     "display": "Positivo",
+     "target": [
+      {
+       "code": "10828004",
+       "display": "Positive",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    },
+    {
+     "code": "ECOLI",
+     "display": "Escherichia coli",
+     "target": [
+      {
+       "code": "112283007",
+       "display": "Escherichia coli",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "KPNEU",
+     "display": "Klebsiella pneumoniae",
+     "target": [
+      {
+       "code": "56415008",
+       "display": "Klebsiella pneumoniae",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "EFAEC",
+     "display": "Enterococcus faecalis",
+     "target": [
+      {
+       "code": "78065002",
+       "display": "Enterococcus faecalis",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "PMIRA",
+     "display": "Proteus mirabilis",
+     "target": [
+      {
+       "code": "73457008",
+       "display": "Proteus mirabilis",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Microorganism'"
+      }
+     ]
+    },
+    {
+     "code": "SEMCRESC",
+     "display": "Não detetado",
+     "target": [
+      {
+       "code": "260415000",
+       "display": "Not detected",
+       "equivalence": "equivalent",
+       "comment": "CPAL v7.0, value set 'Clinical Pathology Outcome'"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "source": "http://example.org/fhir/CodeSystem/sil-unit",
+   "target": "http://unitsofmeasure.org",
+   "element": [
+    {
+     "code": "g/dL",
+     "display": "g/dL",
+     "target": [
+      {
+       "code": "g/dL",
+       "display": "g/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: g/dL"
+      }
+     ]
+    },
+    {
+     "code": "%",
+     "display": "%",
+     "target": [
+      {
+       "code": "%",
+       "display": "%",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: %, L/L"
+      }
+     ]
+    },
+    {
+     "code": "x10^6/µL",
+     "display": "x10^6/µL",
+     "target": [
+      {
+       "code": "10*6/uL",
+       "display": "10*6/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*6/uL"
+      }
+     ]
+    },
+    {
+     "code": "fL",
+     "display": "fL",
+     "target": [
+      {
+       "code": "fL",
+       "display": "fL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: fL"
+      }
+     ]
+    },
+    {
+     "code": "pg",
+     "display": "pg",
+     "target": [
+      {
+       "code": "pg",
+       "display": "pg",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: pg"
+      }
+     ]
+    },
+    {
+     "code": "x10^3/µL",
+     "display": "x10^3/µL",
+     "target": [
+      {
+       "code": "10*3/uL",
+       "display": "10*3/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: 10*3/uL, 10*9/L"
+      }
+     ]
+    },
+    {
+     "code": "mg/dL",
+     "display": "mg/dL",
+     "target": [
+      {
+       "code": "mg/dL",
+       "display": "mg/dL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/dL"
+      }
+     ]
+    },
+    {
+     "code": "ng/mL",
+     "display": "ng/mL",
+     "target": [
+      {
+       "code": "ng/mL",
+       "display": "ng/mL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: ng/mL"
+      }
+     ]
+    },
+    {
+     "code": "mmol/L",
+     "display": "mmol/L",
+     "target": [
+      {
+       "code": "mmol/L",
+       "display": "mmol/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mmol/L"
+      }
+     ]
+    },
+    {
+     "code": "mUI/L",
+     "display": "mUI/L",
+     "target": [
+      {
+       "code": "m[IU]/L",
+       "display": "m[IU]/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: m[IU]/L, u[IU]/mL"
+      }
+     ]
+    },
+    {
+     "code": "mg/L",
+     "display": "mg/L",
+     "target": [
+      {
+       "code": "mg/L",
+       "display": "mg/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: mg/L, mg/dL"
+      }
+     ]
+    },
+    {
+     "code": "U/L",
+     "display": "U/L",
+     "target": [
+      {
+       "code": "U/L",
+       "display": "U/L",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: U/L"
+      }
+     ]
+    },
+    {
+     "code": "INR",
+     "display": "INR",
+     "target": [
+      {
+       "code": "{INR}",
+       "display": "{INR}",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: {INR}"
+      }
+     ]
+    },
+    {
+     "code": "/µL",
+     "display": "/µL",
+     "target": [
+      {
+       "code": "/uL",
+       "display": "/uL",
+       "equivalence": "equivalent",
+       "comment": "UCUM code; CPAL examples for this LOINC: /uL"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

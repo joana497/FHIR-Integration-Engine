@@ -1,0 +1,1644 @@
+{
+ "tests": [
+  {
+   "sil": "HEM01",
+   "lisb": "T-HEMOG",
+   "lisc": "CBC",
+   "sns": "24209",
+   "category": "HM",
+   "components": [
+    {
+     "cpal_line": "2019",
+     "sil": "HGB",
+     "lisb": "B-HGB",
+     "lisc": "HGB",
+     "type": "NM",
+     "units": {
+      "sil": "g/dL",
+      "lisb": "g/dl",
+      "lisc": "g/dL"
+     },
+     "ucum": "g/dL",
+     "ref": [
+      12.0,
+      16.0
+     ],
+     "dist": [
+      13.8,
+      1.3
+     ],
+     "dp": 1,
+     "loinc": "718-7",
+     "loinc_lcn": "Hemoglobin [Mass/volume] in Blood",
+     "name_pt": "Hemoglobina no sangue",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "g/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2020",
+     "sil": "HCT",
+     "lisb": "B-HCT",
+     "lisc": "HCT",
+     "type": "NM",
+     "units": {
+      "sil": "%",
+      "lisb": "%",
+      "lisc": "%"
+     },
+     "ucum": "%",
+     "ref": [
+      36.0,
+      48.0
+     ],
+     "dist": [
+      41.5,
+      3.5
+     ],
+     "dp": 1,
+     "loinc": "4544-3",
+     "loinc_lcn": "Hematocrit [Volume Fraction] of Blood by Automated count",
+     "name_pt": "Hematócrito  de Sangue por Contagem Automatizada",
+     "scale": "Qn",
+     "property": "VFr",
+     "cpal_ucum_examples": [
+      "%",
+      "L/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2021",
+     "sil": "RBC",
+     "lisb": "B-RBC",
+     "lisc": "RBC",
+     "type": "NM",
+     "units": {
+      "sil": "x10^6/µL",
+      "lisb": "10^6/ul",
+      "lisc": "10*6/uL"
+     },
+     "ucum": "10*6/uL",
+     "ref": [
+      4.0,
+      5.5
+     ],
+     "dist": [
+      4.7,
+      0.45
+     ],
+     "dp": 2,
+     "loinc": "789-8",
+     "loinc_lcn": "Erythrocytes  in Blood by Automated count",
+     "name_pt": "Eritrócitos  no sangue por contagem automatizada",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "10*6/uL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2022",
+     "sil": "VGM",
+     "lisb": "B-MCV",
+     "lisc": "MCV",
+     "type": "NM",
+     "units": {
+      "sil": "fL",
+      "lisb": "fl",
+      "lisc": "fL"
+     },
+     "ucum": "fL",
+     "ref": [
+      80.0,
+      100.0
+     ],
+     "dist": [
+      89.0,
+      5.0
+     ],
+     "dp": 1,
+     "loinc": "787-2",
+     "loinc_lcn": "MCV [Entitic volume] by Automated count",
+     "name_pt": "MCV [volume Entítico] por contagem automatizada",
+     "scale": "Qn",
+     "property": "EntVol",
+     "cpal_ucum_examples": [
+      "fL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2023",
+     "sil": "HGM",
+     "lisb": "B-MCH",
+     "lisc": "MCH",
+     "type": "NM",
+     "units": {
+      "sil": "pg",
+      "lisb": "pg",
+      "lisc": "pg"
+     },
+     "ucum": "pg",
+     "ref": [
+      27.0,
+      33.0
+     ],
+     "dist": [
+      29.5,
+      1.8
+     ],
+     "dp": 1,
+     "loinc": "785-6",
+     "loinc_lcn": "MCH [Entitic mass] by Automated count",
+     "name_pt": "MCH [Massa Entítica] por Contagem Automatizada",
+     "scale": "Qn",
+     "property": "EntMass",
+     "cpal_ucum_examples": [
+      "pg"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2024",
+     "sil": "CHGM",
+     "lisb": "B-MCHC",
+     "lisc": "MCHC",
+     "type": "NM",
+     "units": {
+      "sil": "g/dL",
+      "lisb": "g/dl",
+      "lisc": "g/dL"
+     },
+     "ucum": "g/dL",
+     "ref": [
+      32.0,
+      36.0
+     ],
+     "dist": [
+      33.6,
+      1.0
+     ],
+     "dp": 1,
+     "loinc": "786-4",
+     "loinc_lcn": "MCHC [Mass/volume] by Automated count",
+     "name_pt": "MCHC por contagem automatizada",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "g/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2026",
+     "sil": "LEUC",
+     "lisb": "B-WBC",
+     "lisc": "WBC",
+     "type": "NM",
+     "units": {
+      "sil": "x10^3/µL",
+      "lisb": "10^9/L",
+      "lisc": "10*3/uL"
+     },
+     "ucum": {
+      "sil": "10*3/uL",
+      "lisb": "10*9/L",
+      "lisc": "10*3/uL"
+     },
+     "ref": [
+      4.0,
+      10.0
+     ],
+     "dist": [
+      7.0,
+      1.8
+     ],
+     "dp": 1,
+     "loinc": "6690-2",
+     "loinc_lcn": "Leukocytes  in Blood by Automated count",
+     "name_pt": "Leucócitos  no sangue por contagem automatizada",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "10*3/uL",
+      "10*9/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2027",
+     "sil": "NEUT",
+     "lisb": "B-NEU",
+     "lisc": "NEUT",
+     "type": "NM",
+     "units": {
+      "sil": "x10^3/µL",
+      "lisb": "10^9/L",
+      "lisc": "10*3/uL"
+     },
+     "ucum": {
+      "sil": "10*3/uL",
+      "lisb": "10*9/L",
+      "lisc": "10*3/uL"
+     },
+     "ref": [
+      1.8,
+      7.5
+     ],
+     "dist": [
+      4.2,
+      1.3
+     ],
+     "dp": 1,
+     "loinc": "751-8",
+     "loinc_lcn": "Neutrophils  in Blood by Automated count",
+     "name_pt": "Neutrófilos  no sangue por contagem automatizada",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "10*3/uL",
+      "10*9/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2028",
+     "sil": "LINF",
+     "lisb": "B-LYM",
+     "lisc": "LYMPH",
+     "type": "NM",
+     "units": {
+      "sil": "x10^3/µL",
+      "lisb": "10^9/L",
+      "lisc": "10*3/uL"
+     },
+     "ucum": {
+      "sil": "10*3/uL",
+      "lisb": "10*9/L",
+      "lisc": "10*3/uL"
+     },
+     "ref": [
+      1.0,
+      4.0
+     ],
+     "dist": [
+      2.2,
+      0.6
+     ],
+     "dp": 1,
+     "loinc": "731-0",
+     "loinc_lcn": "Lymphocytes  in Blood by Automated count",
+     "name_pt": "Linfócitos  no sangue por contagem automatizada",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "10*3/uL",
+      "10*9/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "2032",
+     "sil": "PLAQ",
+     "lisb": "B-PLT",
+     "lisc": "PLT",
+     "type": "NM",
+     "units": {
+      "sil": "x10^3/µL",
+      "lisb": "10^9/L",
+      "lisc": "10*3/uL"
+     },
+     "ucum": {
+      "sil": "10*3/uL",
+      "lisb": "10*9/L",
+      "lisc": "10*3/uL"
+     },
+     "ref": [
+      150,
+      400
+     ],
+     "dist": [
+      260,
+      55
+     ],
+     "dp": 0,
+     "loinc": "777-3",
+     "loinc_lcn": "Platelets  in Blood by Automated count",
+     "name_pt": "Plaquetas  no sangue por contagem automatizada",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "10*3/uL",
+      "10*9/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1080.9",
+   "cod_mcdt": "A1080.9",
+   "procedure_pt": "Hemograma com fórmula leucocitária (eritrograma, contagem de leucócitos, contagem de plaquetas, fórmula leucocitária e morfologia), s",
+   "order_code": "9564003",
+   "order_en": "Complete blood count with white cell differential, automated (procedure)",
+   "order_pt": "Hemograma com fórmula leucocitária",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "GLI01",
+   "lisb": "T-GLU",
+   "lisc": "GLU",
+   "sns": "22076",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "469",
+     "sil": "GLIJ",
+     "lisb": "S-GLU",
+     "lisc": "GLU",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisb": "mg/dl",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      70,
+      100
+     ],
+     "dist": [
+      94,
+      14
+     ],
+     "dp": 0,
+     "loinc": "1558-6",
+     "loinc_lcn": "Fasting glucose [Mass/volume] in Serum or Plasma",
+     "name_pt": "Glucose em jejum no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1270.4",
+   "cod_mcdt": "A1270.4",
+   "procedure_pt": "Glucose, doseamento, s/u/l",
+   "order_code": "36048009",
+   "order_en": "Glucose measurement (procedure)",
+   "order_pt": "Doseamento de glucose",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "PSA01",
+   "lisb": null,
+   "lisc": "PSA",
+   "sns": "21261",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "106",
+     "sil": "PSAT",
+     "lisb": null,
+     "lisc": "PSA",
+     "type": "NM",
+     "units": {
+      "sil": "ng/mL",
+      "lisc": "ng/mL"
+     },
+     "ucum": "ng/mL",
+     "ref": [
+      0.0,
+      4.0
+     ],
+     "dist": [
+      1.6,
+      1.1
+     ],
+     "dp": 2,
+     "loinc": "2857-1",
+     "loinc_lcn": "Prostate specific Ag [Mass/volume] in Serum or Plasma",
+     "name_pt": "Antigénio específico da próstata (PSA) total no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "ng/mL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1017.5",
+   "cod_mcdt": "A1017.5",
+   "procedure_pt": "Antigénio específico da próstata (PSA) total, s",
+   "order_code": "63476009",
+   "order_en": "Prostate specific antigen measurement (procedure)",
+   "order_pt": "Antigénio específico da próstata total",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "COL01",
+   "lisb": null,
+   "lisc": "CHOL",
+   "sns": "21554",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "216",
+     "sil": "COLT",
+     "lisb": null,
+     "lisc": "CHOL",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      null,
+      190
+     ],
+     "dist": [
+      186,
+      32
+     ],
+     "dp": 0,
+     "loinc": "2093-3",
+     "loinc_lcn": "Cholesterol [Mass/volume] in Serum or Plasma",
+     "name_pt": "Colesterol no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1029.9",
+   "cod_mcdt": "A1029.9",
+   "procedure_pt": "Colesterol total, s/l",
+   "order_code": "121868005",
+   "order_en": "Total cholesterol measurement (procedure)",
+   "order_pt": "Colesterol total",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "HDL01",
+   "lisb": null,
+   "lisc": "HDL",
+   "sns": "21539",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "210",
+     "sil": "CHDL",
+     "lisb": null,
+     "lisc": "HDL",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      40,
+      null
+     ],
+     "dist": [
+      52,
+      12
+     ],
+     "dp": 0,
+     "loinc": "2085-9",
+     "loinc_lcn": "Cholesterol in HDL [Mass/volume] in Serum or Plasma",
+     "name_pt": "Colesterol em HDL no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "412.0",
+   "cod_mcdt": "A412.0",
+   "procedure_pt": "Colesterol da fração HDL, s",
+   "order_code": "28036006",
+   "order_en": "High density lipoprotein cholesterol measurement (procedure)",
+   "order_pt": "Colesterol da fração HDL",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "LDL01",
+   "lisb": null,
+   "lisc": "LDL",
+   "sns": "21545",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "211",
+     "sil": "CLDL",
+     "lisb": null,
+     "lisc": "LDL",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      null,
+      115
+     ],
+     "dist": [
+      112,
+      28
+     ],
+     "dp": 0,
+     "loinc": "2089-1",
+     "loinc_lcn": "Cholesterol in LDL [Mass/volume] in Serum or Plasma",
+     "name_pt": "Colesterol em LDL no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "542.8",
+   "cod_mcdt": "A542.8",
+   "procedure_pt": "Colesterol da fração LDL, s",
+   "order_code": "113079009",
+   "order_en": "Low density lipoprotein cholesterol measurement (procedure)",
+   "order_pt": "Colesterol da fração LDL",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "TRG01",
+   "lisb": null,
+   "lisc": "TRIG",
+   "sns": "22920",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "990",
+     "sil": "TRIG",
+     "lisb": null,
+     "lisc": "TRIG",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      null,
+      150
+     ],
+     "dist": [
+      128,
+      45
+     ],
+     "dp": 0,
+     "loinc": "2571-8",
+     "loinc_lcn": "Triglyceride [Mass/volume] in Serum or Plasma",
+     "name_pt": "Triglicerídeos no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "620.3",
+   "cod_mcdt": "A620.3",
+   "procedure_pt": "Triglicéridos, s/u/l",
+   "order_code": "14740000",
+   "order_en": "Triglycerides measurement (procedure)",
+   "order_pt": "Triglicéridos",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "CRE01",
+   "lisb": "T-CREA",
+   "lisc": "CREA",
+   "sns": "21620",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "232",
+     "sil": "CREA",
+     "lisb": "S-CREA",
+     "lisc": "CREA",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisb": "mg/dl",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      0.6,
+      1.2
+     ],
+     "dist": [
+      0.9,
+      0.2
+     ],
+     "dp": 2,
+     "loinc": "2160-0",
+     "loinc_lcn": "Creatinine [Mass/volume] in Serum or Plasma",
+     "name_pt": "Creatinina no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL",
+      "ng/mL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "427.8",
+   "cod_mcdt": "A427.8",
+   "procedure_pt": "Creatinina, s/u",
+   "order_code": "70901006",
+   "order_en": "Creatinine measurement (procedure)",
+   "order_pt": "Creatinina",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "URE01",
+   "lisb": null,
+   "lisc": "UREA",
+   "sns": "22949",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "996",
+     "sil": "UREIA",
+     "lisb": null,
+     "lisc": "UREA",
+     "type": "NM",
+     "units": {
+      "sil": "mg/dL",
+      "lisc": "mg/dL"
+     },
+     "ucum": "mg/dL",
+     "ref": [
+      15,
+      45
+     ],
+     "dist": [
+      32,
+      9
+     ],
+     "dp": 0,
+     "loinc": "3091-6",
+     "loinc_lcn": "Urea [Mass/volume] in Serum or Plasma",
+     "name_pt": "Ureia no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "625.4",
+   "cod_mcdt": "A625.4",
+   "procedure_pt": "Ureia, s/u",
+   "order_code": "105010007",
+   "order_en": "Urea measurement (procedure)",
+   "order_pt": "Ureia",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "NA01",
+   "lisb": "T-NA",
+   "lisc": "NA",
+   "sns": "22793",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "972",
+     "sil": "NA",
+     "lisb": "S-NA",
+     "lisc": "NA",
+     "type": "NM",
+     "units": {
+      "sil": "mmol/L",
+      "lisb": "mmol/l",
+      "lisc": "mmol/L"
+     },
+     "ucum": "mmol/L",
+     "ref": [
+      135,
+      145
+     ],
+     "dist": [
+      140,
+      2.5
+     ],
+     "dp": 0,
+     "loinc": "2951-2",
+     "loinc_lcn": "Sodium [Moles/volume] in Serum or Plasma",
+     "name_pt": "Sódio no soro ou plasma",
+     "scale": "Qn",
+     "property": "SCnc",
+     "cpal_ucum_examples": [
+      "mmol/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "616.5",
+   "cod_mcdt": "A616.5",
+   "procedure_pt": "Sódio, s/u",
+   "order_code": "25197003",
+   "order_en": "Sodium measurement (procedure)",
+   "order_pt": "Sódio",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "K01",
+   "lisb": "T-K",
+   "lisc": "K",
+   "sns": "22617",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "826",
+     "sil": "K",
+     "lisb": "S-K",
+     "lisc": "K",
+     "type": "NM",
+     "units": {
+      "sil": "mmol/L",
+      "lisb": "mmol/l",
+      "lisc": "mmol/L"
+     },
+     "ucum": "mmol/L",
+     "ref": [
+      3.5,
+      5.1
+     ],
+     "dist": [
+      4.3,
+      0.4
+     ],
+     "dp": 1,
+     "loinc": "2823-3",
+     "loinc_lcn": "Potassium  in Serum or Plasma",
+     "name_pt": "Potássio  no soro ou plasma",
+     "scale": "Qn",
+     "property": "SCnc",
+     "cpal_ucum_examples": [
+      "mmol/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "591.6",
+   "cod_mcdt": "A591.6",
+   "procedure_pt": "Potássio, s/u",
+   "order_code": "59573005",
+   "order_en": "Potassium measurement (procedure)",
+   "order_pt": "Potássio",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "TSH01",
+   "lisb": "T-TSH",
+   "lisc": "TSH",
+   "sns": "22253",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "538",
+     "sil": "TSH",
+     "lisb": "S-TSH",
+     "lisc": "TSH",
+     "type": "NM",
+     "units": {
+      "sil": "mUI/L",
+      "lisb": "mU/L",
+      "lisc": "m[IU]/L"
+     },
+     "ucum": "m[IU]/L",
+     "ref": [
+      0.4,
+      4.0
+     ],
+     "dist": [
+      1.9,
+      0.9
+     ],
+     "dp": 2,
+     "loinc": "3016-3",
+     "loinc_lcn": "Thyrotropin [Units/volume] in Serum or Plasma",
+     "name_pt": "Hormona tiroestimulante (TSH) no soro ou plasma",
+     "scale": "Qn",
+     "property": "ACnc",
+     "cpal_ucum_examples": [
+      "m[IU]/L",
+      "u[IU]/mL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1053.1",
+   "cod_mcdt": "A1053.1",
+   "procedure_pt": "Hormona tirostimulante (TSH), s",
+   "order_code": "61167004",
+   "order_en": "Thyroid stimulating hormone measurement (procedure)",
+   "order_pt": "Hormona tirostimulante - TSH",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "HBA1C",
+   "lisb": null,
+   "lisc": "A1C",
+   "sns": "22151",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "497",
+     "sil": "A1C",
+     "lisb": null,
+     "lisc": "A1C",
+     "type": "NM",
+     "units": {
+      "sil": "%",
+      "lisc": "%"
+     },
+     "ucum": "%",
+     "ref": [
+      4.0,
+      5.6
+     ],
+     "dist": [
+      5.7,
+      0.9
+     ],
+     "dp": 1,
+     "loinc": "4548-4",
+     "loinc_lcn": "Hemoglobin A1c/Hemoglobin.total in Blood",
+     "name_pt": "Hemoglobina A1c (glicada), no sangue",
+     "scale": "Qn",
+     "property": "MFr",
+     "cpal_ucum_examples": [
+      "%"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "531.2",
+   "cod_mcdt": "A531.2",
+   "procedure_pt": "Hemoglobina A1c (glicada)",
+   "order_code": "43396009",
+   "order_en": "Hemoglobin A1c measurement (procedure)",
+   "order_pt": "Hemoglobina A1c (glicada)",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "PCR01",
+   "lisb": "T-CRP",
+   "lisc": "CRP",
+   "sns": "22669",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "841",
+     "sil": "PCR",
+     "lisb": "S-CRP",
+     "lisc": "CRP",
+     "type": "NM",
+     "units": {
+      "sil": "mg/L",
+      "lisb": "mg/l",
+      "lisc": "mg/L"
+     },
+     "ucum": "mg/L",
+     "ref": [
+      0.0,
+      5.0
+     ],
+     "dist": [
+      4.0,
+      6.0
+     ],
+     "dp": 1,
+     "loinc": "1988-5",
+     "loinc_lcn": "C reactive protein [Mass/volume] in Serum or Plasma",
+     "name_pt": "Proteína C reactiva no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "mg/L",
+      "mg/dL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisb": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "291.7",
+   "cod_mcdt": "A291.7",
+   "procedure_pt": "Proteína C reativa, s",
+   "order_code": "55235003",
+   "order_en": "C-reactive protein measurement (procedure)",
+   "order_pt": "Proteína C reativa",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "ALT01",
+   "lisb": null,
+   "lisc": "ALT",
+   "sns": "21217",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "96",
+     "sil": "ALT",
+     "lisb": null,
+     "lisc": "ALT",
+     "type": "NM",
+     "units": {
+      "sil": "U/L",
+      "lisc": "U/L"
+     },
+     "ucum": "U/L",
+     "ref": [
+      7,
+      56
+     ],
+     "dist": [
+      28,
+      12
+     ],
+     "dp": 0,
+     "loinc": "1742-6",
+     "loinc_lcn": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+     "name_pt": "Aminotransferase da alanina no soro ou plasma",
+     "scale": "Qn",
+     "property": "CCnc",
+     "cpal_ucum_examples": [
+      "U/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "524.0",
+   "cod_mcdt": "A524.0",
+   "procedure_pt": "Aminotransferase da alanina (ALT), s",
+   "order_code": "34608000",
+   "order_en": "Alanine aminotransferase measurement (procedure)",
+   "order_pt": "Aminotransferase da alanina - ALT",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "AST01",
+   "lisb": null,
+   "lisc": "AST",
+   "sns": "21220",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "97",
+     "sil": "AST",
+     "lisb": null,
+     "lisc": "AST",
+     "type": "NM",
+     "units": {
+      "sil": "U/L",
+      "lisc": "U/L"
+     },
+     "ucum": "U/L",
+     "ref": [
+      10,
+      40
+     ],
+     "dist": [
+      25,
+      9
+     ],
+     "dp": 0,
+     "loinc": "1920-8",
+     "loinc_lcn": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+     "name_pt": "Aminotransferase do aspartato no soro ou plasma",
+     "scale": "Qn",
+     "property": "CCnc",
+     "cpal_ucum_examples": [
+      "U/L"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "523.1",
+   "cod_mcdt": "A523.1",
+   "procedure_pt": "Aminotransferase do aspartato (AST), s",
+   "order_code": "45896001",
+   "order_en": "Aspartate aminotransferase measurement (procedure)",
+   "order_pt": "Aminotransferase do aspartato - AST",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "PRL01",
+   "lisb": null,
+   "lisc": "PRL",
+   "sns": "22647",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "831",
+     "sil": "PRL",
+     "lisb": null,
+     "lisc": "PRL",
+     "type": "NM",
+     "units": {
+      "sil": "ng/mL",
+      "lisc": "ng/mL"
+     },
+     "ucum": "ng/mL",
+     "ref": [
+      null,
+      23.0
+     ],
+     "dist": [
+      14.0,
+      7.0
+     ],
+     "dp": 1,
+     "loinc": "2842-3",
+     "loinc_lcn": "Prolactin [Mass/volume] in Serum or Plasma",
+     "name_pt": "Prolactina no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "ng/mL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "697.1",
+   "cod_mcdt": "A697.1",
+   "procedure_pt": "Prolactina (PRL), s",
+   "order_code": "113083009",
+   "order_en": "Prolactin measurement (procedure)",
+   "order_pt": "Prolactina - PRL",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "TP01",
+   "lisb": null,
+   "lisc": "INR",
+   "sns": "24347",
+   "category": "HM",
+   "components": [
+    {
+     "cpal_line": "2094",
+     "sil": "INR",
+     "lisb": null,
+     "lisc": "INR",
+     "type": "NM",
+     "units": {
+      "sil": "INR",
+      "lisc": "{INR}"
+     },
+     "ucum": "{INR}",
+     "ref": [
+      0.8,
+      1.2
+     ],
+     "dist": [
+      1.05,
+      0.15
+     ],
+     "dp": 2,
+     "loinc": "6301-6",
+     "loinc_lcn": "INR in Platelet poor plasma by Coagulation assay",
+     "name_pt": "Tempo de protrombina, INR, sangue",
+     "scale": "Qn",
+     "property": "RelTime",
+     "cpal_ucum_examples": [
+      "{INR}"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "1086.8",
+   "cod_mcdt": "A1086.8",
+   "procedure_pt": "Tempo de protrombina (TP, Quick, INR)",
+   "order_code": "396451008",
+   "order_en": "Prothrombin time (procedure)",
+   "order_pt": "Tempo de protrombina (TP, Quick, INR)",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "FER01",
+   "lisb": null,
+   "lisc": "FERR",
+   "sns": "21895",
+   "category": "CH",
+   "components": [
+    {
+     "cpal_line": "394",
+     "sil": "FERR",
+     "lisb": null,
+     "lisc": "FERR",
+     "type": "NM",
+     "units": {
+      "sil": "ng/mL",
+      "lisc": "ng/mL"
+     },
+     "ucum": "ng/mL",
+     "ref": [
+      30,
+      400
+     ],
+     "dist": [
+      120,
+      80
+     ],
+     "dp": 0,
+     "loinc": "2276-4",
+     "loinc_lcn": "Ferritin [Mass/volume] in Serum or Plasma",
+     "name_pt": "Ferritina no soro ou plasma",
+     "scale": "Qn",
+     "property": "MCnc",
+     "cpal_ucum_examples": [
+      "ng/mL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    }
+   ],
+   "conv": "483.9",
+   "cod_mcdt": "A483.9",
+   "procedure_pt": "Ferritina, s",
+   "order_code": "489004",
+   "order_en": "Ferritin measurement (procedure)",
+   "order_pt": "Ferritina",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "GS01",
+   "lisb": "T-ABORH",
+   "lisc": "ABORH",
+   "sns": "55010",
+   "category": "BLB",
+   "components": [
+    {
+     "cpal_line": "5724",
+     "sil": "ABO",
+     "lisb": "B-ABO",
+     "lisc": "ABO",
+     "type": "CE",
+     "value_set": "abo",
+     "loinc": "883-9",
+     "loinc_lcn": "ABO group [Type] in Blood",
+     "name_pt": "Tipo grupo AB0 no sangue",
+     "scale": "Nom",
+     "property": "Type",
+     "cpal_ucum_examples": []
+    },
+    {
+     "cpal_line": "5725",
+     "sil": "RH",
+     "lisb": "B-RH",
+     "lisc": "RH",
+     "type": "CE",
+     "value_set": "rh",
+     "loinc": "10331-7",
+     "loinc_lcn": "Rh [Type] in Blood",
+     "name_pt": "Fator Rhesus",
+     "scale": "Nom",
+     "property": "Type",
+     "cpal_ucum_examples": []
+    }
+   ],
+   "conv": "079.5",
+   "cod_mcdt": "A079.5",
+   "procedure_pt": "Tipagem AB0 e Rh (D)",
+   "order_code": "81228005",
+   "order_en": "ABO and Rho(D) typing (procedure)",
+   "order_pt": "Tipagem AB0 e Rh (D)",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "URO01",
+   "lisb": null,
+   "lisc": "UCULT",
+   "sns": "26498",
+   "category": "MB",
+   "components": [
+    {
+     "cpal_line": "5584",
+     "sil": "EPIT",
+     "lisb": null,
+     "lisc": "EPI",
+     "type": "CE",
+     "value_set": "presence",
+     "loinc": "20453-7",
+     "loinc_lcn": "Epithelial cells [Presence] in Urine sediment by Light microscopy",
+     "name_pt": "Presença de Células epiteliais no sedimento urinário por microscopia ótica",
+     "scale": "Ord",
+     "property": "PrThr",
+     "cpal_ucum_examples": []
+    },
+    {
+     "cpal_line": "5585",
+     "sil": "LEUU",
+     "lisb": null,
+     "lisc": "WBCU",
+     "type": "NM",
+     "units": {
+      "sil": "/µL",
+      "lisc": "/uL"
+     },
+     "ucum": "/uL",
+     "ref": [
+      0,
+      25
+     ],
+     "dist": [
+      30,
+      40
+     ],
+     "dp": 0,
+     "loinc": "30405-5",
+     "loinc_lcn": "Leukocytes  in Urine",
+     "name_pt": "Leucócitos na urina",
+     "scale": "Qn",
+     "property": "NCnc",
+     "cpal_ucum_examples": [
+      "/uL"
+     ],
+     "ucum_in_cpal_examples": {
+      "sil": true,
+      "lisc": true
+     }
+    },
+    {
+     "cpal_line": "5568",
+     "sil": "BACT",
+     "lisb": null,
+     "lisc": "ORG",
+     "type": "CE",
+     "value_set": "organism",
+     "loinc": "630-4",
+     "loinc_lcn": "Bacteria identified in Urine by Culture",
+     "name_pt": "Bactéria identificada na urocultura",
+     "scale": "Nom",
+     "property": "Prid",
+     "cpal_ucum_examples": []
+    }
+   ],
+   "conv": "1265.8",
+   "cod_mcdt": "A1265.8",
+   "procedure_pt": "Urina - exame direto, cultural, identificação e TSA (Urocultura)",
+   "order_code": "117010004",
+   "order_en": "Urine culture (procedure)",
+   "order_pt": "Urocultura",
+   "order_system": "http://snomed.info/sct"
+  },
+  {
+   "sil": "VIH01",
+   "lisb": "T-HIV",
+   "lisc": "HIV",
+   "sns": "26006",
+   "category": "SR",
+   "components": [
+    {
+     "cpal_line": "5233",
+     "sil": "VIH12",
+     "lisb": "S-HIV",
+     "lisc": "HIV",
+     "type": "CE",
+     "value_set": "posneg",
+     "loinc": "69668-2",
+     "loinc_lcn": "HIV 1 and 2 Ab [Identifier] in Serum or Plasma by Rapid immunoassay",
+     "name_pt": "VIH1 e VIH2 screening no soro ou plasma, teste rápido/imunoensaio",
+     "scale": "Nom",
+     "property": "Prid",
+     "cpal_ucum_examples": []
+    }
+   ],
+   "conv": "1308.5",
+   "cod_mcdt": "A1308.5",
+   "procedure_pt": "Anticorpos para VIH 1 e 2 (inclui confirmação)",
+   "order_code": "359796005",
+   "order_en": "Measurement of both Human immunodeficiency virus 1 antibody and Human immunodeficiency virus 2 antibody (procedure)",
+   "order_pt": "Anticorpos para VIH 1 e 2",
+   "order_system": "http://snomed.info/sct"
+  }
+ ],
+ "value_sets": {
+  "abo": [
+   {
+    "local": {
+     "sil": "A",
+     "lisb": "A",
+     "lisc": "A"
+    },
+    "cpal_sheet": "AB0 Group Phenotype",
+    "snomed": "112144000",
+    "weight": 0.46,
+    "fsn": "Blood group A (finding)",
+    "pt_en": "Blood group A",
+    "pt_pt": "Grupo de Sangue Tipo A"
+   },
+   {
+    "local": {
+     "sil": "B",
+     "lisb": "B",
+     "lisc": "B"
+    },
+    "cpal_sheet": "AB0 Group Phenotype",
+    "snomed": "112149005",
+    "weight": 0.08,
+    "fsn": "Blood group B (finding)",
+    "pt_en": "Blood group B",
+    "pt_pt": "Grupo de Sangue Tipo B"
+   },
+   {
+    "local": {
+     "sil": "AB",
+     "lisb": "AB",
+     "lisc": "AB"
+    },
+    "cpal_sheet": "AB0 Group Phenotype",
+    "snomed": "165743006",
+    "weight": 0.04,
+    "fsn": "Blood group AB (finding)",
+    "pt_en": "Blood group AB",
+    "pt_pt": "Grupo de Sangue Tipo AB"
+   },
+   {
+    "local": {
+     "sil": "O",
+     "lisb": "O",
+     "lisc": "O"
+    },
+    "cpal_sheet": "AB0 Group Phenotype",
+    "snomed": "58460004",
+    "weight": 0.42,
+    "fsn": "Blood group O (finding)",
+    "pt_en": "Blood group O",
+    "pt_pt": "Grupo de Sangue Tipo O"
+   }
+  ],
+  "rh": [
+   {
+    "local": {
+     "sil": "RH+",
+     "lisb": "POS",
+     "lisc": "RHPOS"
+    },
+    "cpal_sheet": "Rhesus Factor",
+    "snomed": "165747007",
+    "weight": 0.85,
+    "fsn": "RhD positive (finding)",
+    "pt_en": "RhD positive",
+    "pt_pt": "RhD positivo"
+   },
+   {
+    "local": {
+     "sil": "RH-",
+     "lisb": "NEG",
+     "lisc": "RHNEG"
+    },
+    "cpal_sheet": "Rhesus Factor",
+    "snomed": "165746003",
+    "weight": 0.15,
+    "fsn": "RhD negative (finding)",
+    "pt_en": "RhD negative",
+    "pt_pt": "RhD negativo"
+   }
+  ],
+  "presence": [
+   {
+    "local": {
+     "sil": "PRES",
+     "lisc": "PRES"
+    },
+    "cpal_sheet": "Clinical Pathology Outcome",
+    "snomed": "52101004",
+    "weight": 0.6,
+    "fsn": "Present (qualifier value)",
+    "pt_en": "Present",
+    "pt_pt": "Presente"
+   },
+   {
+    "local": {
+     "sil": "AUS",
+     "lisc": "ABS"
+    },
+    "cpal_sheet": "Clinical Pathology Outcome",
+    "snomed": "2667000",
+    "weight": 0.4,
+    "fsn": "Absent (qualifier value)",
+    "pt_en": "Absent",
+    "pt_pt": "Ausente"
+   }
+  ],
+  "posneg": [
+   {
+    "local": {
+     "sil": "NEG",
+     "lisb": "NR",
+     "lisc": "NEG"
+    },
+    "cpal_sheet": "Clinical Pathology Outcome",
+    "snomed": "260385009",
+    "weight": 0.97,
+    "fsn": "Negative (qualifier value)",
+    "pt_en": "Negative",
+    "pt_pt": "Negativo"
+   },
+   {
+    "local": {
+     "sil": "POS",
+     "lisb": "R",
+     "lisc": "POS"
+    },
+    "cpal_sheet": "Clinical Pathology Outcome",
+    "snomed": "10828004",
+    "weight": 0.03,
+    "fsn": "Positive (qualifier value)",
+    "pt_en": "Positive",
+    "pt_pt": "Positivo"
+   }
+  ],
+  "organism": [
+   {
+    "local": {
+     "sil": "ECOLI",
+     "lisc": "ECO"
+    },
+    "cpal_sheet": "Microorganism",
+    "snomed": "112283007",
+    "weight": 0.45,
+    "fsn": "Escherichia coli (organism)",
+    "pt_en": "Escherichia coli",
+    "pt_pt": "Escherichia coli"
+   },
+   {
+    "local": {
+     "sil": "KPNEU",
+     "lisc": "KPN"
+    },
+    "cpal_sheet": "Microorganism",
+    "snomed": "56415008",
+    "weight": 0.12,
+    "fsn": "Klebsiella pneumoniae (organism)",
+    "pt_en": "Klebsiella pneumoniae",
+    "pt_pt": "Klebsiella pneumoniae"
+   },
+   {
+    "local": {
+     "sil": "EFAEC",
+     "lisc": "EFA"
+    },
+    "cpal_sheet": "Microorganism",
+    "snomed": "78065002",
+    "weight": 0.08,
+    "fsn": "Enterococcus faecalis (organism)",
+    "pt_en": "Enterococcus faecalis",
+    "pt_pt": "Enterococcus faecalis"
+   },
+   {
+    "local": {
+     "sil": "PMIRA",
+     "lisc": "PMI"
+    },
+    "cpal_sheet": "Microorganism",
+    "snomed": "73457008",
+    "weight": 0.05,
+    "fsn": "Proteus mirabilis (organism)",
+    "pt_en": "Proteus mirabilis",
+    "pt_pt": "Proteus mirabilis"
+   },
+   {
+    "local": {
+     "sil": "SEMCRESC",
+     "lisc": "NG"
+    },
+    "cpal_sheet": "Clinical Pathology Outcome",
+    "snomed": "260415000",
+    "weight": 0.3,
+    "fsn": "Not detected (qualifier value)",
+    "pt_en": "Not detected",
+    "pt_pt": "Não detetado"
+   }
+  ]
+ },
+ "cpal": {
+  "name": "CPAL - Catalogo Portugues de Analises Laboratoriais (SPMS)",
+  "version": "7.0",
+  "file": "CPAL_V7.0.xlsx"
+ }
+}

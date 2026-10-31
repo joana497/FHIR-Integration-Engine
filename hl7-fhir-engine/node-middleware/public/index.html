@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor FHIR · Painel de Controlo (demonstração)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{
+  --p:#00708d;--pd:#005a73;--pl:#e0f3f7;--nv:#003c5a;--nvl:#e6eff4;
+  --gn:#3b7d3b;--gnl:#e8f3e8;--rd:#b32d1e;--rdl:#fbecea;--am:#8c5a00;--aml:#fdf3e0;
+  --gy50:#f7f7f5;--gy100:#ededeb;--gy300:#c4c3be;--gy600:#5f5e5a;--gy900:#1a1a18;
+  --bd:#d8d7d2;--fn:'Lato',system-ui,sans-serif;--r:4px;--rl:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fn);font-size:13px;color:var(--gy900);background:var(--nv)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:inset(50%)}
+#app{display:flex;flex-direction:column;height:100vh;background:#fff;overflow:hidden}
+.tb{background:var(--nv);height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:9px}
+.gov-bar{width:4px;height:30px;background:#e8b430;border-radius:2px}
+.tb-t{color:#fff;font-weight:700;font-size:13px}
+.tb-s{color:rgba(255,255,255,.5);font-size:10px}
+.tb-right{display:flex;align-items:center;gap:8px}
+.sp{display:flex;align-items:center;gap:5px;padding:3px 9px;border-radius:3px;border:1px solid;font-size:10px;font-weight:600}
+.sp.on{border-color:rgba(59,125,59,.5);color:#5ebf5e}
+.sp.off{border-color:rgba(179,45,30,.4);color:#e07070}
+.dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.pulse{animation:blink 2s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.user-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--r);padding:4px 10px;font-size:11px;color:rgba(255,255,255,.9)}
+.user-av{width:22px;height:22px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.role-chip{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;border:1px solid}
+.rc-admin{background:rgba(179,45,30,.2);color:#e87070;border-color:rgba(179,45,30,.4)}
+.rc-medico{background:rgba(0,112,141,.2);color:#60c4d9;border-color:rgba(0,112,141,.4)}
+.rc-tecnico{background:rgba(59,125,59,.2);color:#7ecf7e;border-color:rgba(59,125,59,.4)}
+.rc-auditor{background:rgba(140,90,0,.2);color:#e8c060;border-color:rgba(140,90,0,.4)}
+.layout{display:flex;flex:1;overflow:hidden}
+.sb{width:200px;background:#fff;border-right:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0;padding:12px 0}
+.sb-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gy600);padding:0 13px;margin-bottom:5px;margin-top:10px}
+.ni{display:flex;align-items:center;gap:7px;padding:8px 13px;font-size:12px;font-weight:500;color:var(--gy600);cursor:pointer;border-left:3px solid transparent;transition:all .12s}
+.ni:hover{color:var(--gy900);background:var(--gy50)}
+.ni.active{color:var(--p);background:var(--pl);border-left-color:var(--p)}
+.ni i{font-size:14px;width:15px;text-align:center}
+.ni .nb{margin-left:auto;font-size:9px;background:var(--gy100);color:var(--gy600);padding:1px 6px;border-radius:10px;font-weight:700}
+.ni.active .nb{background:rgba(0,112,141,.15);color:var(--p)}
+.sb-foot{margin-top:auto;padding:10px 13px;font-size:10px;color:var(--gy300)}
+.ct{flex:1;overflow-y:auto;padding:18px;background:var(--gy50)}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:8px;flex-wrap:wrap}
+.pt{font-size:19px;font-weight:700;color:var(--nv)}
+.ps{font-size:11px;color:var(--gy600);margin-top:2px}
+.br{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:var(--r);font-family:var(--fn);font-size:12px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .12s}
+.bp{background:var(--p);color:#fff;border-color:var(--p)}.bp:hover{background:var(--pd)}
+.bg{background:transparent;color:var(--gy600);border-color:var(--bd)}.bg:hover{background:var(--gy100);color:var(--gy900)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.spin{animation:spin .7s linear infinite;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;border:1px solid}
+.bg-green{background:var(--gnl);color:var(--gn);border-color:rgba(59,125,59,.3)}
+.bg-red{background:var(--rdl);color:var(--rd);border-color:rgba(179,45,30,.3)}
+.bg-blue{background:var(--pl);color:var(--p);border-color:rgba(0,112,141,.3)}
+.bg-navy{background:var(--nvl);color:var(--nv);border-color:rgba(0,60,90,.3)}
+.bg-amber{background:var(--aml);color:var(--am);border-color:rgba(140,90,0,.3)}
+.bg-gray{background:var(--gy100);color:var(--gy600);border-color:var(--bd)}
+.bg-prl{background:#f0eeff;color:#4a3aaa;border-color:rgba(74,58,170,.3)}
+.card{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:12px}
+.ch{padding:10px 14px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.cht{font-size:12px;font-weight:700;color:var(--nv)}
+.cb{padding:14px}
+.mg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.mc{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:14px}
+.mc.ab{border-top:3px solid var(--p)}.mc.an{border-top:3px solid var(--nv)}.mc.ag{border-top:3px solid var(--gn)}.mc.aa{border-top:3px solid var(--am)}
+.ml{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gy600);margin-bottom:6px}
+.mv{font-size:24px;font-weight:700;line-height:1}
+.mv-p{color:var(--p)}.mv-n{color:var(--nv)}.mv-g{color:var(--gn)}.mv-a{color:var(--am)}
+.ms{font-size:10px;color:var(--gy600);margin-top:3px}
+.tbl-w{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{border-bottom:2px solid var(--bd)}
+thead th{text-align:left;padding:8px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gy600)}
+tbody tr{border-bottom:1px solid var(--gy100)}tbody tr:hover{background:var(--gy50)}
+tbody td{padding:8px 10px;color:var(--gy600)}tbody td:first-child{color:var(--gy900);font-weight:600}
+.mono{font-family:monospace;font-size:11px}
+.alert{display:flex;align-items:flex-start;gap:9px;padding:10px 13px;border-radius:var(--r);border-left:4px solid;margin-bottom:12px;font-size:11px}
+.a-info{background:var(--pl);border-color:var(--p);color:var(--pd)}
+.a-ok{background:var(--gnl);border-color:var(--gn);color:var(--gn)}
+.a-err{background:var(--rdl);border-color:var(--rd);color:var(--rd)}
+.a-warn{background:var(--aml);border-color:var(--am);color:var(--am)}
+.a-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.empty{text-align:center;padding:26px;color:var(--gy600)}
+.empty i{font-size:24px;display:block;margin-bottom:7px;opacity:.35}
+#login{position:fixed;inset:0;background:var(--nv);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+.login-box{background:#fff;border-radius:var(--rl);padding:28px;width:100%;max-width:360px}
+.login-logo{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.login-logo .gov-bar{height:36px}
+.login-t{font-size:15px;font-weight:700;color:var(--nv)}
+.login-s{font-size:11px;color:var(--gy600);margin-top:2px}
+.fc{margin-bottom:10px}
+.fl{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gy600);margin-bottom:4px}
+.fi{font-family:var(--fn);font-size:12px;width:100%;padding:8px 10px;border:2px solid var(--bd);border-radius:var(--r);color:var(--gy900);background:#fff}
+.fi:focus{outline:none;border-color:var(--p)}
+.role-select{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+.role-btn{padding:8px 6px;border-radius:var(--r);border:2px solid var(--bd);background:#fff;cursor:pointer;text-align:center;font-family:var(--fn)}
+.role-btn:hover{border-color:var(--p);background:var(--pl)}
+.role-btn.sel{border-color:var(--p);background:var(--pl)}
+.role-btn i{font-size:18px;display:block;margin-bottom:4px;color:var(--gy300)}
+.role-btn.sel i{color:var(--p)}
+.role-btn .rn{font-size:11px;font-weight:700;color:var(--gy600)}
+.role-btn.sel .rn{color:var(--p)}
+.login-cred{background:var(--gy50);border:1px solid var(--bd);border-radius:var(--r);padding:10px;margin-bottom:12px;font-size:10px;color:var(--gy600)}
+.login-cred strong{color:var(--gy900)}
+.login-err{background:var(--rdl);border:1px solid rgba(179,45,30,.3);border-radius:var(--r);padding:8px 10px;font-size:11px;color:var(--rd);margin-bottom:8px;display:none}
+.oauth-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:var(--r);font-family:var(--fn);font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--p);background:var(--p);color:#fff}
+.oauth-btn:hover{background:var(--pd)}
+.token-display{background:#1a1a18;border-radius:var(--r);padding:12px;font-family:monospace;font-size:10px;line-height:1.8;color:#ddd;max-height:120px;overflow:auto;word-break:break-all}
+.audit-log{background:#1a1a18;border-radius:var(--r);padding:10px;font-family:monospace;font-size:10px;line-height:1.85;height:240px;overflow-y:auto}
+.aline{display:flex;gap:7px}.ats{color:#5f5e5a;min-width:130px}.alvl{font-weight:700;min-width:46px}
+.alvl.OK{color:#5ebf5e}.alvl.WARN{color:#e8a030}.alvl.ERROR{color:#e07070}.alvl.AUTH{color:#60c4d9}.alvl.DENY{color:#e87070}.alvl.INFO{color:#888}
+.amsg{color:#ddd}
+#toast{position:fixed;bottom:14px;right:14px;display:flex;flex-direction:column;gap:6px;z-index:60;max-width:300px}
+.toast{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:9px 12px;font-size:11px;border-left:4px solid}
+.toast.success{border-left-color:var(--gn)}.toast.error{border-left-color:var(--rd)}.toast.info{border-left-color:var(--p)}
+.toast-t{font-weight:700;color:var(--gy900)}.toast-m{color:var(--gy600);font-size:10px}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+</style>
+</head>
+<body>
+<h2 class="sr-only">Motor FHIR — painel de controlo, cliente real do motor de integração HL7 FHIR R4</h2>
+
+<div id="login">
+  <div class="login-box">
+    <div class="login-logo"><div class="gov-bar"></div><div><div class="login-t">Motor FHIR · demo</div><div class="login-s">Autenticação OAuth 2.1 · JWT</div></div></div>
+    <div class="login-cred"><strong>Contas de demonstração</strong><br>admin / admin123 · medico / med123<br>tecnico / tec123 · auditor / aud123</div>
+    <div class="fc"><label class="fl" for="usr">Utilizador</label><input class="fi" type="text" id="usr" value="admin"></div>
+    <div class="fc"><label class="fl" for="pw">Password</label><input class="fi" type="password" id="pw" value="admin123"></div>
+    <div><div class="fl">Perfil</div><div class="role-select" id="roles">
+      <div class="role-btn sel" data-role="admin" onclick="selRole(this)"><i class="ti ti-shield-lock"></i><div class="rn">Administrador</div></div>
+      <div class="role-btn" data-role="medico" onclick="selRole(this)"><i class="ti ti-stethoscope"></i><div class="rn">Médico</div></div>
+      <div class="role-btn" data-role="tecnico" onclick="selRole(this)"><i class="ti ti-tool"></i><div class="rn">Técnico</div></div>
+      <div class="role-btn" data-role="auditor" onclick="selRole(this)"><i class="ti ti-clipboard-check"></i><div class="rn">Auditor</div></div>
+    </div></div>
+    <div class="login-err" id="lerr"></div>
+    <button class="oauth-btn" id="loginBtn" onclick="doLogin()"><i class="ti ti-lock"></i>Autenticar</button>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="tb">
+    <div class="tb-brand"><div class="gov-bar"></div><div><div class="tb-t">Motor FHIR · demo</div><div class="tb-s">Cliente real — HL7 FHIR R4</div></div></div>
+    <div class="tb-right">
+      <div class="sp off" id="sp-mid"><div class="dot"></div>Middleware</div>
+      <div class="sp off" id="sp-py"><div class="dot"></div>Python</div>
+      <div class="sp off" id="sp-hapi"><div class="dot"></div>HAPI</div>
+      <div class="user-pill"><div class="user-av" id="uav">?</div><span id="uname">—</span><span class="role-chip" id="urole">—</span>
+        <button class="bg" style="font-size:10px;padding:2px 7px;margin-left:4px" onclick="doLogout()"><i class="ti ti-logout"></i>Sair</button>
+      </div>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="sb">
+      <div class="sb-label">Navegação</div>
+      <div class="ni active" data-page="dashboard" onclick="nav(this)"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+      <div class="ni" data-page="patients" onclick="nav(this)"><i class="ti ti-users"></i>Utentes</div>
+      <div class="ni" data-page="requests" onclick="nav(this)"><i class="ti ti-file-description"></i>Requisições</div>
+      <div class="ni" data-page="resources" onclick="nav(this)"><i class="ti ti-circles"></i>Recursos FHIR</div>
+      <div class="ni" data-page="ingest" onclick="nav(this)"><i class="ti ti-inbox"></i>Recepção externa</div>
+      <div class="ni" data-page="terminology" onclick="nav(this)"><i class="ti ti-language"></i>Validação terminológica</div>
+      <div class="ni" data-page="exchanges" onclick="nav(this)"><i class="ti ti-arrows-exchange"></i>Histórico de trocas</div>
+      <div class="ni" data-page="audit" onclick="nav(this)"><i class="ti ti-clipboard-list"></i>Auditoria</div>
+      <div class="sb-foot">@ama-pt/agora-design-system<br><span style="color:var(--p)">cliente live · /app</span></div>
+    </nav>
+    <main class="ct" id="content"></main>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+var API=location.origin;          // GUI is served by the middleware → same origin
+var TOKEN=null, SESSION=null, SEL='admin';
+var SOURCE='sil';var SOURCES=null;
+var ORU_SAMPLES={"02": "MSH|^~\\&|LISC|LAB-C^^EXAMPLE|FHIR-ENGINE|EXAMPLE|20240403140500||ORU^R01^ORU_R01|LISC00000002|P|2.5.1|||AL|NE||UNICODE UTF-8\nPID|1||C700002^^^LISC^MR~700002^^^SNS^NNPRT||Monteiro Fonseca^Alberto||19920211|M\nORC|RE|C-ORD-000002|C-FIL-000002||CM||||20240403140500|||^Lima\nOBR|1|C-ORD-000002|C-FIL-000002-1|GLU^Glucose, doseamento, s/u/l^99LISC|||202404030800|||||||||^Lima||||||20240403140500||CH|F\nOBX|1|NM|GLU^Glucose em jejum no soro ou plasma^99LISC||81|mg/dL^mg/dL^99LISC|70-100|N|||F|||20240403140500\nOBR|2|C-ORD-000002|C-FIL-000002-2|A1C^Hemoglobina A1c (glicada)^99LISC|||202404030800|||||||||^Lima||||||20240403140500||CH|F\nOBX|1|NM|A1C^Hemoglobina A1c (glicada), no sangue^99LISC||4.5|%^%^99LISC|4.0-5.6|N|||F|||20240403140500\n", "03": "MSH|^~\\&|LISC|LAB-C^^EXAMPLE|FHIR-ENGINE|EXAMPLE|20240404140100||ORU^R01^ORU_R01|LISC00000003|P|2.5.1|||AL|NE||UNICODE UTF-8\nPID|1||C700003^^^LISC^MR~700003^^^SNS^NNPRT||Fernandes^Nuno||19830119|M\nORC|RE|C-ORD-000003|C-FIL-000003||CM||||20240404140100|||^Azevedo\nOBR|1|C-ORD-000003|C-FIL-000003-1|ABORH^Tipagem AB0 e Rh (D)^99LISC|||202404040800|||||||||^Azevedo||||||20240404140100||BLB|F\nOBX|1|CWE|ABO^Tipo grupo AB0 no sangue^99LISC||O^Grupo de Sangue Tipo O^99LISC||||||F|||20240404140100\nOBX|2|CWE|RH^Fator Rhesus^99LISC||RHPOS^RhD positivo^99LISC||||||F|||20240404140100\n", "04": "MSH|^~\\&|LISC|LAB-C^^EXAMPLE|FHIR-ENGINE|EXAMPLE|20240405142400||ORU^R01^ORU_R01|LISC00000004|P|2.5.1|||AL|NE||UNICODE UTF-8\nPID|1||C700004^^^LISC^MR~700004^^^SNS^NNPRT||Barbosa Gonçalves^Ricardo||19740803|M\nORC|RE|C-ORD-000004|C-FIL-000004||CM||||20240405142400|||^Campos\nOBR|1|C-ORD-000004|C-FIL-000004-1|UCULT^Urina - exame direto, cultural, identificação e TSA (Urocult^99LISC|||202404050800|||||||||^Campos||||||20240405142400||MB|F\nOBX|1|CWE|EPI^Presença de Células epiteliais no sedimento urinário por mic^99LISC||ABS^Ausente^99LISC||||||F|||20240405142400\nOBX|2|NM|WBCU^Leucócitos na urina^99LISC||23|/uL^/uL^99LISC|0-25|N|||F|||20240405142400\nOBX|3|CWE|ORG^Bactéria identificada na urocultura^99LISC||ECO^Escherichia coli^99LISC||||||F|||20240405142400\n"};
+var ROLE_LABELS={admin:'ADMINISTRADOR',medico:'MÉDICO',tecnico:'TÉCNICO',auditor:'AUDITOR'};
+var ROLE_CLS={admin:'rc-admin',medico:'rc-medico',tecnico:'rc-tecnico',auditor:'rc-auditor'};
+
+function selRole(el){document.querySelectorAll('.role-btn').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel');SEL=el.dataset.role;
+  var h={admin:['admin','admin123'],medico:['medico','med123'],tecnico:['tecnico','tec123'],auditor:['auditor','aud123']};
+  document.getElementById('usr').value=h[SEL][0];document.getElementById('pw').value=h[SEL][1];}
+
+function toast(type,t,m){var a=document.getElementById('toast');var d=document.createElement('div');d.className='toast '+type;
+  d.innerHTML='<div class="toast-t">'+t+'</div><div class="toast-m">'+(m||'')+'</div>';a.appendChild(d);setTimeout(function(){d.remove()},3500);}
+
+async function api(method,path,body){
+  var headers={'Content-Type':'application/json'};
+  if(TOKEN) headers['Authorization']='Bearer '+TOKEN;
+  var res=await fetch(API+path,{method:method,headers:headers,body:body?JSON.stringify(body):undefined});
+  var data=null;try{data=await res.json()}catch(e){}
+  if(!res.ok){var err=new Error((data&&data.error)||('HTTP '+res.status));err.status=res.status;err.data=data;throw err;}
+  return data;
+}
+
+async function doLogin(){
+  var u=document.getElementById('usr').value.trim();
+  var p=document.getElementById('pw').value;
+  var errEl=document.getElementById('lerr');errEl.style.display='none';
+  var btn=document.getElementById('loginBtn');btn.disabled=true;btn.innerHTML='<i class="ti ti-loader spin"></i>A autenticar…';
+  try{
+    var r=await api('POST','/auth/login',{username:u,password:p,role:SEL});
+    TOKEN=r.access_token;
+    SESSION={name:r.name,role:r.role,scopes:r.scopes,expires_in:r.expires_in};
+    document.getElementById('uav').textContent=(r.name||'?').split(' ').map(function(w){return w[0]}).slice(0,2).join('');
+    document.getElementById('uname').textContent=r.name;
+    var rc=document.getElementById('urole');rc.className='role-chip '+ROLE_CLS[r.role];rc.textContent=ROLE_LABELS[r.role];
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='flex';
+    toast('success','Autenticado','Bem-vindo, '+r.name);
+    checkHealth();
+    nav(document.querySelector('[data-page=dashboard]'));
+  }catch(e){
+    errEl.textContent=e.data&&e.data.error?e.data.error:'Falha na autenticação';errEl.style.display='block';
+  }finally{btn.disabled=false;btn.innerHTML='<i class="ti ti-lock"></i>Autenticar';}
+}
+
+async function doLogout(){try{await api('POST','/auth/logout')}catch(e){}TOKEN=null;SESSION=null;
+  document.getElementById('app').style.display='none';document.getElementById('login').style.display='flex';}
+
+async function checkHealth(){
+  try{var h=await api('GET','/health');
+    setPill('sp-mid',true);
+    setPill('sp-py',h.python&&h.python.ok);
+    setPill('sp-hapi',h.hapi&&h.hapi.ok);
+  }catch(e){setPill('sp-mid',false);setPill('sp-py',false);setPill('sp-hapi',false);}
+}
+function setPill(id,on){var el=document.getElementById(id);if(!el)return;el.className='sp '+(on?'on':'off');el.querySelector('.dot').className='dot'+(on?' pulse':'');}
+
+function can(perm){var m={admin:{read:1,write:1,del:1,sync:1,admin:1,audit:1},medico:{read:1},tecnico:{read:1,write:1,sync:1},auditor:{read:1,audit:1}};return SESSION&&m[SESSION.role]&&m[SESSION.role][perm];}
+
+function nav(el){document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('active')});el.classList.add('active');render(el.dataset.page);}
+
+async function render(page){
+  var c=document.getElementById('content');
+  c.innerHTML='<div class="empty"><i class="ti ti-loader spin"></i>A carregar…</div>';
+  try{
+    if(page==='dashboard') await renderDashboard(c);
+    else if(page==='patients') await renderList(c,'Utentes','/fhir/Patient','Patient');
+    else if(page==='requests') await renderRequests(c);
+    else if(page==='resources') await renderResources(c);
+    else if(page==='terminology') await renderTerminology(c);
+    else if(page==='ingest') await renderIngest(c);
+    else if(page==='exchanges') await renderExchanges(c);
+    else if(page==='audit') await renderAudit(c);
+  }catch(e){
+    if(e.status===403) c.innerHTML='<div class="alert a-err"><i class="ti ti-lock a-icon"></i>HTTP 403 — '+e.message+'</div>';
+    else if(e.status===401){toast('error','Sessão expirada','Faça login novamente');doLogout();}
+    else c.innerHTML='<div class="alert a-err"><i class="ti ti-alert-circle a-icon"></i>'+e.message+'</div>';
+  }
+}
+
+async function renderDashboard(c){
+  var pats=await api('GET','/fhir/Patient?limit=50').catch(function(){return{total:0}});
+  var reqs=await api('GET','/fhir/ServiceRequest?limit=50').catch(function(){return{total:0}});
+  var hapiPat=await api('GET','/hapi/fhir/Patient?_summary=count').catch(function(){return{total:'—'}});
+  var health=await api('GET','/health').catch(function(){return{}});
+  c.innerHTML='<div class="ph"><div><div class="pt">Dashboard</div><div class="ps">Cliente live do motor FHIR — dados reais via API</div></div>'
+    +'<div class="br">'+(can('sync')?'<button class="bp" id="syncBtn" onclick="syncAll()"><i class="ti ti-player-play"></i>Sincronizar tudo</button>':'<span class="badge bg-gray">Sync requer TÉCNICO/ADMIN</span>')+'</div></div>'
+    +'<div class="alert a-ok"><i class="ti ti-shield-check a-icon"></i>Sessão JWT activa · '+SESSION.name+' · '+ROLE_LABELS[SESSION.role]+' · scopes: '+SESSION.scopes.length+'</div>'
+    +'<div class="mg">'
+    +'<div class="mc ab"><div class="ml">Utentes (fonte)</div><div class="mv mv-p">'+(pats.total!=null?pats.total:'—')+'</div><div class="ms">GET /fhir/Patient</div></div>'
+    +'<div class="mc an"><div class="ml">Requisições</div><div class="mv mv-n">'+(reqs.total!=null?reqs.total:'—')+'</div><div class="ms">GET /fhir/ServiceRequest</div></div>'
+    +'<div class="mc ag"><div class="ml">Patients no HAPI</div><div class="mv mv-g">'+(hapiPat.total!=null?hapiPat.total:'—')+'</div><div class="ms">HAPI FHIR store</div></div>'
+    +'<div class="mc aa"><div class="ml">Perfil</div><div class="mv mv-a" style="font-size:15px">'+ROLE_LABELS[SESSION.role]+'</div><div class="ms">'+SESSION.scopes.length+' scopes</div></div>'
+    +'</div>'
+    +'<div class="alert '+(health.audit_db==='ready'&&!health.audit_outbox_pending?'a-ok':'a-warn')+'"><i class="ti ti-file-certificate a-icon"></i>'
+    +'Registo de auditoria: base de dados <strong>'+(health.audit_db||'?')+'</strong> · registos no outbox local à espera de reenvio: <strong>'+(health.audit_outbox_pending!=null?health.audit_outbox_pending:'?')+'</strong>'
+    +' · sincronizações e recepções são <em>fail-closed</em> (recusadas se a intenção não puder ser registada).</div>'
+    +'<div class="card"><div class="ch"><span class="cht">Scopes FHIR concedidos</span></div><div class="cb"><div style="display:flex;flex-wrap:wrap;gap:5px">'
+    +SESSION.scopes.map(function(s){return '<span class="badge bg-blue mono">'+s+'</span>'}).join('')+'</div></div></div>';
+}
+
+async function syncAll(){
+  var btn=document.getElementById('syncBtn');if(btn){btn.disabled=true;btn.innerHTML='<i class="ti ti-loader spin"></i>A sincronizar…';}
+  try{var r=await api('POST','/sync/all?source='+encodeURIComponent(SOURCE)+'&limit=50');
+    var sm=r.summary||{};toast(r.ok?'success':'error','Sincronização '+SOURCE.toUpperCase(),(sm.ok||0)+' / '+(sm.total||0)+' requisições enviadas para o HAPI FHIR');
+    if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-player-play"></i>Sincronizar tudo';}}
+  catch(e){if(e.status===403)toast('error','Acesso negado',e.message);else if(e.status===503)toast('error','Auditoria indisponível (fail-closed)',e.message);else toast('error','Erro',e.message);
+    if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-player-play"></i>Sincronizar tudo';}}
+}
+
+async function renderList(c,title,path,rtype){
+  var data=await api('GET',path+'?limit=50');
+  var entries=(data.entry||[]).map(function(e){return e.resource});
+  c.innerHTML='<div class="ph"><div><div class="pt">'+title+'</div><div class="ps">GET '+path+' · '+(data.total||entries.length)+' registos</div></div>'
+    +'<span class="badge bg-green"><i class="ti ti-eye" style="margin-right:3px"></i>Leitura autorizada</span></div>'
+    +'<div class="card"><div class="tbl-w"><table><thead><tr><th>ID</th><th>Nome</th><th>Género</th><th>Nascimento</th></tr></thead><tbody>'
+    +(entries.length===0?'<tr><td colspan="4"><div class="empty"><i class="ti ti-database"></i>Sem dados</div></td></tr>'
+      :entries.map(function(p){var n=(p.name&&p.name[0])?((p.name[0].given||[]).join(' ')+' '+(p.name[0].family||'')):'—';
+        return '<tr><td class="mono">'+(p.id||'—').slice(0,14)+'</td><td>'+n+'</td>'
+          +'<td><span class="badge '+(p.gender==='male'?'bg-navy':'bg-prl')+'">'+(p.gender||'—')+'</span></td>'
+          +'<td class="mono">'+(p.birthDate||'—')+'</td></tr>';}).join(''))
+    +'</tbody></table></div></div>';
+}
+
+async function loadSources(){
+  if(SOURCES) return SOURCES;
+  try{var r=await api('GET','/api/sources');SOURCES=(r.database||[]).map(function(x){return x.name});}catch(e){SOURCES=['sil'];}
+  if(!SOURCES.length) SOURCES=['sil'];
+  return SOURCES;
+}
+function sourceSelector(){
+  var names=SOURCES||['sil'];
+  return '<div style="display:flex;gap:5px;align-items:center"><span class="fl" style="margin:0">Fonte:</span>'
+    +names.map(function(n){return '<button class="'+(n===SOURCE?'bp':'bg')+'" style="font-size:11px;padding:4px 10px" onclick="SOURCE=\''+n+'\';render(\'requests\')">'+n.toUpperCase()+'</button>'}).join('')+'</div>';
+}
+
+function srLabel(r){
+  var lines=(r.orderDetail||[]).map(function(d){return d.text||(d.coding&&d.coding[0]&&(d.coding[0].display||d.coding[0].code))}).filter(Boolean);
+  if(lines.length) return lines.join('; ');
+  var c=r.code||{};
+  return c.text||(c.coding&&c.coding[0]&&(c.coding[0].display||c.coding[0].code))||'—';
+}
+
+async function renderRequests(c){
+  await loadSources();
+  var data=await api('GET','/fhir/ServiceRequest?limit=50&source='+encodeURIComponent(SOURCE));
+  var entries=(data.entry||[]).map(function(e){return e.resource});
+  var statusCls={completed:'bg-green',active:'bg-blue',draft:'bg-gray'};
+  c.innerHTML='<div class="ph"><div><div class="pt">Requisições MCDT</div><div class="ps">GET /fhir/ServiceRequest?source='+SOURCE+' · '+(data.total||entries.length)+' pedidos</div></div>'
+    +'<div class="br">'+sourceSelector()+(can('sync')?'<button class="bp" onclick="syncAll()"><i class="ti ti-player-play"></i>Sincronizar todas ('+SOURCE.toUpperCase()+')</button>':'')+'</div></div>'
+    +'<div class="card"><div class="tbl-w"><table><thead><tr><th>ID</th><th>Estado</th><th>Prioridade</th><th>Exames pedidos</th><th>Validar HAPI</th>'+(can('sync')?'<th>Sync</th>':'')+'</tr></thead><tbody>'
+    +(entries.length===0?'<tr><td colspan="6"><div class="empty"><i class="ti ti-file"></i>Sem requisições</div></td></tr>'
+      :entries.map(function(r){var id=(r.identifier&&r.identifier[0])?r.identifier[0].value:(r.id||'—');
+        var code=escapeHtml(srLabel(r));
+        return '<tr><td class="mono">'+id+'</td>'
+          +'<td><span class="badge '+(statusCls[r.status]||'bg-gray')+'">'+(r.status||'—')+'</span></td>'
+          +'<td>'+(r.priority||'—')+'</td><td>'+code+'</td>'
+          +'<td><button class="bg" style="font-size:10px;padding:3px 9px" onclick="validateOrderBundle(\''+id+'\')"><i class="ti ti-checkup-list"></i>Validar</button></td>'
+          +(can('sync')?'<td><button class="bp" style="font-size:10px;padding:3px 9px" onclick="syncOrder(\''+id+'\',this)"><i class="ti ti-player-play"></i>Sync</button></td>':'')
+          +'</tr>';}).join(''))
+    +'</tbody></table></div></div>';
+}
+
+async function validateOrderBundle(numpedido){
+  try{
+    var res=await api('GET','/fhir/bundle/'+encodeURIComponent(SOURCE)+'/order/'+encodeURIComponent(numpedido)+'/hapi-validation');
+    var sevCls={fatal:'bg-red',error:'bg-red',warning:'bg-amber',information:'bg-blue'};
+    var c=res.counts||{fatal:0,error:0,warning:0,information:0,total:0};
+    var body=''
+      +'<div class="alert a-info"><i class="ti ti-info-circle a-icon"></i>'
+      +'Validação estrutural FHIR R4 por <strong>HAPI FhirValidator</strong> (operação <span class="mono">$validate</span>). '
+      +'Reprova apenas em <em>error</em> ou <em>fatal</em>.</div>'
+      +'<div class="mg" style="margin:8px 0 12px 0">'
+      +'<div class="mc" style="border-top:3px solid var(--rd)"><div class="ml">Errors</div><div class="mv" style="color:var(--rd)">'+(c.error+c.fatal)+'</div></div>'
+      +'<div class="mc aa"><div class="ml">Warnings</div><div class="mv mv-a">'+c.warning+'</div></div>'
+      +'<div class="mc ab"><div class="ml">Information</div><div class="mv mv-p">'+c.information+'</div></div>'
+      +'<div class="mc"><div class="ml">Total</div><div class="mv">'+c.total+'</div></div>'
+      +'</div>'
+      +((res.issues||[]).length===0
+        ?'<div class="empty"><i class="ti ti-check"></i>Sem issues reportados pelo HAPI</div>'
+        :'<div class="tbl-w"><table><thead><tr><th>Severity</th><th>Code</th><th>Location</th><th>Diagnostics</th></tr></thead><tbody>'
+          +res.issues.map(function(i){
+            return '<tr>'
+              +'<td><span class="badge '+(sevCls[i.severity]||'bg-gray')+'">'+i.severity+'</span></td>'
+              +'<td class="mono" style="font-size:10px">'+(i.code||'')+'</td>'
+              +'<td class="mono" style="font-size:10px;max-width:200px;overflow:hidden;text-overflow:ellipsis">'+(i.location||'—')+'</td>'
+              +'<td style="font-size:11px">'+escapeHtml(i.diagnostics||'')+'</td>'
+              +'</tr>';
+          }).join('')
+          +'</tbody></table></div>');
+    var title='Validação HAPI · '+numpedido+(res.ok
+      ?' <span class="badge bg-green" style="margin-left:6px">VALID</span>'
+      :' <span class="badge bg-red" style="margin-left:6px">INVALID</span>');
+    openModal(title, body);
+  }catch(e){
+    toast('error','Erro na validação',e.message);
+  }
+}
+
+async function syncOrder(id,btn){btn.disabled=true;btn.innerHTML='<i class="ti ti-loader spin"></i>';
+  try{var r=await api('POST','/sync/'+encodeURIComponent(SOURCE)+'/order/'+encodeURIComponent(id));toast('success','Sincronizado',id+' · '+r.entriesIn+' recursos · auditoria: '+r.audit);btn.innerHTML='<i class="ti ti-check"></i>OK';}
+  catch(e){toast('error',e.status===503?'Auditoria indisponível (fail-closed)':'Erro',e.message);btn.disabled=false;btn.innerHTML='<i class="ti ti-player-play"></i>Sync';}
+}
+
+async function renderResources(c){
+  var types=['Patient','ServiceRequest','DiagnosticReport','Observation','ImagingStudy'];
+  var rows='';
+  for(var i=0;i<types.length;i++){
+    var t=types[i];var count='—';
+    try{var r=await api('GET','/hapi/fhir/'+t+'?_summary=count');count=r.total!=null?r.total:'—';}catch(e){count='—';}
+    rows+='<tr><td>'+t+'</td><td><span class="badge '+(count>0?'bg-green':'bg-gray')+'">'+count+'</span></td><td class="mono">GET /hapi/fhir/'+t+'</td></tr>';
+  }
+  c.innerHTML='<div class="ph"><div><div class="pt">Recursos FHIR R4</div><div class="ps">Contagem real no HAPI FHIR store</div></div></div>'
+    +'<div class="card"><div class="tbl-w"><table><thead><tr><th>Recurso</th><th>Quantidade</th><th>Endpoint</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
+
+async function renderAudit(c){
+  var data=await api('GET','/audit?limit=200');
+  var lvlCls={AUTH:'bg-blue',DENY:'bg-red',ERROR:'bg-red',WARN:'bg-amber',OK:'bg-green',INFO:'bg-gray'};
+  c.innerHTML='<div class="ph"><div><div class="pt">Auditoria</div><div class="ps">Eventos de segurança persistidos · audit.security_event · '+data.total+' registos</div></div>'
+    +'<div class="br">'
+    +'<button class="bg" onclick="render(\'audit\')"><i class="ti ti-refresh"></i>Refresh</button>'
+    +'<button class="bg" onclick="download(\'/audit/security.csv\')"><i class="ti ti-file-spreadsheet"></i>CSV</button>'
+    +'<button class="bg" onclick="download(\'/audit/security.json\')"><i class="ti ti-braces"></i>JSON</button>'
+    +'</div></div>'
+    +'<div class="alert a-warn"><i class="ti ti-alert-triangle a-icon"></i>Registo eletrónico dos acessos (cf. Lei n.º 58/2019, art. 29.º). Eventos persistidos em Postgres; se a base de dados falhar, num outbox local reenviado a cada 30 s.</div>'
+    +'<div class="card"><div class="ch"><span class="cht">Terminal — vista cronológica</span><span class="badge bg-navy">'+data.total+'</span></div><div class="cb">'
+    +'<div class="audit-log">'+(data.entries.length===0?'<div style="color:#5f5e5a;padding:20px;text-align:center">Sem eventos registados</div>'
+      :data.entries.map(function(e){var ts=new Date(e.occurred_at).toLocaleString('pt-PT');
+        return '<div class="aline"><span class="ats">'+ts+'</span><span class="alvl '+e.level+'">'+e.level+'</span><span class="amsg">['+(e.user_sub||'—')+'] '+e.message+(e.status_code?' ('+e.status_code+')':'')+'</span></div>';}).join(''))
+    +'</div></div></div>'
+    +'<div class="card"><div class="ch"><span class="cht">Tabela detalhada</span></div><div class="tbl-w"><table>'
+    +'<thead><tr><th>Quando</th><th>Tipo</th><th>Utilizador</th><th>Método</th><th>Path</th><th>Status</th><th>Mensagem</th></tr></thead><tbody>'
+    +(data.entries.length===0?'<tr><td colspan="7"><div class="empty"><i class="ti ti-clipboard-list"></i>Sem eventos</div></td></tr>'
+      :data.entries.map(function(e){return '<tr>'
+        +'<td class="mono">'+new Date(e.occurred_at).toLocaleString('pt-PT')+'</td>'
+        +'<td><span class="badge '+(lvlCls[e.level]||'bg-gray')+'">'+e.level+'</span></td>'
+        +'<td>'+(e.user_sub||'—')+'</td>'
+        +'<td class="mono">'+(e.method||'—')+'</td>'
+        +'<td class="mono">'+(e.path||'—')+'</td>'
+        +'<td>'+(e.status_code?'<span class="badge '+(e.status_code<400?'bg-green':'bg-red')+'">'+e.status_code+'</span>':'—')+'</td>'
+        +'<td style="font-size:11px">'+e.message+'</td>'
+        +'</tr>';}).join(''))
+    +'</tbody></table></div></div>';
+}
+
+async function renderTerminology(c){
+  var m=await api('GET','/terminology/metrics');
+  var systemLabel=function(s){
+    if(s==='http://loinc.org') return 'LOINC';
+    if(s==='http://snomed.info/sct') return 'SNOMED CT';
+    if(s==='http://unitsofmeasure.org') return 'UCUM';
+    return s;
+  };
+  var totalCodes=(m.summary||[]).reduce(function(a,s){return a+parseInt(s.total_codes||0)},0);
+  var totalValid=(m.summary||[]).reduce(function(a,s){return a+parseInt(s.valid_codes||0)},0);
+  var totalInvalid=(m.summary||[]).reduce(function(a,s){return a+parseInt(s.invalid_codes||0)},0);
+  var overallRate=totalCodes?Math.round(100*totalValid/totalCodes):0;
+
+  c.innerHTML='<div class="ph"><div><div class="pt">Validação Terminológica</div><div class="ps">Códigos LOINC, SNOMED CT e UCUM validados contra servidor de terminologia FHIR</div></div>'
+    +'<div class="br">'
+    +'<button class="bg" onclick="render(\'terminology\')"><i class="ti ti-refresh"></i>Refresh</button>'
+    +(can('admin')?'<button class="bp" onclick="revalidateTerm(this)"><i class="ti ti-reload"></i>Revalidar agora</button>':'')
+    +'</div></div>'
+    +(m.enabled===false
+      ? '<div class="alert a-warn"><i class="ti ti-alert-triangle a-icon"></i>Validação terminológica desactivada (TERMINOLOGY_ENABLED=false).</div>'
+      : '<div class="alert a-info"><i class="ti ti-server a-icon"></i>Servidor de terminologia: <strong>'+m.server+'</strong> · cache 24h · revalidação diária às 03:33</div>')
+    +'<div class="mg">'
+    +'<div class="mc ab"><div class="ml">Códigos únicos</div><div class="mv mv-p">'+totalCodes+'</div><div class="ms">Pares (sistema, código)</div></div>'
+    +'<div class="mc ag"><div class="ml">Resolvidos</div><div class="mv mv-g">'+totalValid+'</div><div class="ms">Validados com sucesso</div></div>'
+    +'<div class="mc" style="border-top:3px solid var(--rd)"><div class="ml">Não resolvidos</div><div class="mv" style="color:var(--rd)">'+totalInvalid+'</div><div class="ms">Inválidos ou desconhecidos</div></div>'
+    +'<div class="mc aa"><div class="ml">Taxa de resolução</div><div class="mv mv-a">'+overallRate+'%</div><div class="ms">Global</div></div>'
+    +'</div>'
+    +'<div class="card"><div class="ch"><span class="cht">Resolução por sistema</span></div><div class="tbl-w"><table>'
+    +'<thead><tr><th>Sistema</th><th>Total</th><th>Válidos</th><th>Inválidos</th><th>Taxa</th><th>Vistos</th><th>Último uso</th></tr></thead><tbody>'
+    +((m.summary||[]).length===0
+      ?'<tr><td colspan="7"><div class="empty"><i class="ti ti-language"></i>Sem códigos validados. Execute uma sincronização para popular a tabela.</div></td></tr>'
+      :m.summary.map(function(s){
+        var rate=parseInt(s.resolution_rate_pct||0);
+        var rateCls=rate>=80?'bg-green':rate>=50?'bg-amber':'bg-red';
+        return '<tr>'
+          +'<td><span class="badge bg-blue">'+systemLabel(s.code_system)+'</span> <span class="mono" style="color:var(--gy600);font-size:10px">'+s.code_system+'</span></td>'
+          +'<td>'+s.total_codes+'</td>'
+          +'<td><span class="badge bg-green">'+s.valid_codes+'</span></td>'
+          +'<td>'+(parseInt(s.invalid_codes)>0?'<span class="badge bg-red">'+s.invalid_codes+'</span>':'<span style="color:var(--gy300)">0</span>')+'</td>'
+          +'<td><span class="badge '+rateCls+'">'+rate+'%</span></td>'
+          +'<td>'+s.total_validations+'</td>'
+          +'<td class="mono" style="font-size:10px">'+(s.last_seen?new Date(s.last_seen).toLocaleString('pt-PT'):'—')+'</td>'
+          +'</tr>';
+      }).join(''))
+    +'</tbody></table></div></div>'
+    +'<div class="card"><div class="ch"><span class="cht">Códigos não resolvidos · top 50</span><span class="badge bg-red">'+(m.topUnresolved||[]).length+'</span></div><div class="tbl-w"><table>'
+    +'<thead><tr><th>Sistema</th><th>Código</th><th>Display local</th><th>Mensagem do servidor</th><th>Vistos</th><th>Última vez</th></tr></thead><tbody>'
+    +((m.topUnresolved||[]).length===0
+      ?'<tr><td colspan="6"><div class="empty"><i class="ti ti-check"></i>Nenhum código por resolver — excelente!</div></td></tr>'
+      :m.topUnresolved.map(function(u){return '<tr>'
+        +'<td><span class="badge bg-gray">'+systemLabel(u.code_system)+'</span></td>'
+        +'<td class="mono">'+u.code+'</td>'
+        +'<td>'+(u.display_local||'—')+'</td>'
+        +'<td style="font-size:11px;color:var(--gy600)">'+(u.message||'')+'</td>'
+        +'<td>'+u.times_seen+'</td>'
+        +'<td class="mono" style="font-size:10px">'+new Date(u.last_seen_at).toLocaleString('pt-PT')+'</td>'
+        +'</tr>';}).join(''))
+    +'</tbody></table></div></div>'
+    +'<div class="alert a-info" style="margin-top:10px"><i class="ti ti-info-circle a-icon"></i>Códigos não resolvidos são marcados nos recursos FHIR enviados com uma <span class="mono" style="font-size:10px">extension url=http://example.org/fhir/StructureDefinition/terminology-validation-issue</span> — o bundle é enviado na mesma para o HAPI.</div>';
+}
+
+async function revalidateTerm(btn){
+  btn.disabled=true;btn.innerHTML='<i class="ti ti-loader spin"></i>A revalidar…';
+  try{var r=await api('POST','/terminology/revalidate');
+    toast('success','Revalidação concluída',r.revalidated+' códigos revalidados');
+    render('terminology');
+  }catch(e){toast('error','Erro',e.message);btn.disabled=false;btn.innerHTML='<i class="ti ti-reload"></i>Revalidar agora';}
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Recepção externa — demonstrates the engine receiving a FHIR Bundle from
+//  an external institution, validating it (HAPI + terminology), and storing
+//  it in HAPI. Every stage of the pipeline is shown as inspectable JSON.
+// ════════════════════════════════════════════════════════════════════════════
+async function renderIngest(c){
+  await loadSources();
+  // List of seeded orders to offer as "incoming" samples
+  var srBundle=await api('GET','/fhir/ServiceRequest?limit=20&source='+encodeURIComponent(SOURCE));
+  var orders=(srBundle.entry||[]).map(function(e){
+    var r=e.resource;
+    var id=(r.identifier&&r.identifier[0])?r.identifier[0].value:r.id;
+    var label=escapeHtml(srLabel(r));
+    return {id:id, label:label};
+  });
+
+  c.innerHTML='<div class="ph"><div><div class="pt">Recepção externa</div><div class="ps">Demonstração: instituição externa envia um Bundle FHIR → engine valida → engine persiste no HAPI → cada etapa visível como JSON</div></div></div>'
+    +'<div class="alert a-info"><i class="ti ti-info-circle a-icon"></i>'
+    +'<div>O Bundle introduzido é enviado para <span class="mono">POST /api/fhir/ingest</span> como se viesse de uma instituição parceira. '
+    +'A pipeline executa <strong>4 etapas</strong>: Recepção · Validação estrutural (HAPI) · Validação terminológica · Persistência no HAPI.</div>'
+    +'</div>'
+
+    +'<div class="card"><div class="ch"><span class="cht">1. Origem da mensagem</span></div><div class="cb">'
+    +'<div class="fl" style="margin-bottom:6px">Carregar um Bundle de exemplo (simula envio externo a partir das requisições da BD legada):</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">'
+    +orders.map(function(o){
+      return '<button class="bg" style="text-align:left;padding:7px;font-size:11px" onclick="loadSampleBundle(\''+o.id+'\')"><span class="mono" style="color:var(--p);font-size:9px">'+o.id+'</span><br/><span style="color:var(--gy900);font-size:10px">'+o.label+'</span></button>';
+    }).join('')
+    +'</div>'
+
+    +'<div class="fl" style="margin-bottom:4px">Ou colar JSON do Bundle aqui:</div>'
+    +'<textarea id="ingest-payload" placeholder=\'{"resourceType":"Bundle", "type":"transaction", "entry":[...]}\' '
+    +'style="width:100%;min-height:140px;font-family:var(--mono),monospace;font-size:11px;border:1px solid var(--gy200);border-radius:var(--rm);padding:8px;background:#fafaf8"></textarea>'
+
+    +'<div style="margin-top:10px;display:flex;gap:8px;align-items:center">'
+    +'<label class="fl">Origem (X-Source-Institution):</label>'
+    +'<input id="ingest-source" type="text" placeholder="ex: Hospital São João" value="Hospital S. João - LIS" '
+    +'style="flex:1;border:1px solid var(--gy200);border-radius:var(--rm);padding:6px 9px;font-size:12px"/>'
+    +'<button class="bp" onclick="submitIngest()"><i class="ti ti-send"></i>Enviar para o engine</button>'
+    +'</div>'
+    +'</div></div>'
+
+    +'<div id="ingest-trace"></div>'
+
+    +'<div class="card" style="margin-top:14px"><div class="ch"><span class="cht">2. Mensagem HL7 v2.5.1 ORU^R01 (laboratório LIS-C)</span><span class="badge bg-blue">POST /api/v2/oru · MLLP</span></div><div class="cb">'
+    +'<div class="fl" style="margin-bottom:6px">A mensagem é convertida em Bundle FHIR pelo motor (adaptador ORU^R01 + ConceptMap) e segue a mesma pipeline. A resposta inclui o ACK HL7 (AA / AR / AE).</div>'
+    +'<div style="display:flex;gap:6px;margin-bottom:8px">'
+    +Object.keys(ORU_SAMPLES).map(function(k){return '<button class="bg" style="font-size:11px" onclick="loadOru(\''+k+'\')"><i class="ti ti-file-text"></i>Exemplo oru_r01_'+k+'</button>'}).join('')
+    +'</div>'
+    +'<textarea id="oru-payload" placeholder="MSH|^~\\&|..." style="width:100%;min-height:140px;font-family:var(--mono),monospace;font-size:11px;border:1px solid var(--gy200);border-radius:var(--rm);padding:8px;background:#fafaf8"></textarea>'
+    +'<div style="margin-top:8px"><button class="bp" onclick="submitOru()"><i class="ti ti-send"></i>Enviar ORU^R01</button></div>'
+    +'<div id="oru-result"></div>'
+    +'</div></div>';
+}
+
+function loadOru(k){document.getElementById('oru-payload').value=ORU_SAMPLES[k].replace(/\r/g,'\n');}
+
+async function submitOru(){
+  var raw=document.getElementById('oru-payload').value.trim();
+  var out=document.getElementById('oru-result');
+  if(!raw){toast('error','Sem dados','Cole uma mensagem HL7 v2 ou carregue um exemplo');return;}
+  var er7=raw.replace(/\r\n|\n/g,'\r');
+  out.innerHTML='<div class="empty"><i class="ti ti-loader spin"></i>A processar…</div>';
+  try{
+    var res=await fetch(location.origin+'/api/v2/oru',{method:'POST',
+      headers:{'Content-Type':'x-application/hl7-v2+er7','Authorization':'Bearer '+TOKEN},body:er7});
+    var data=await res.json();
+    var cls=data.ack_code==='AA'?'a-ok':data.ack_code==='AR'?'a-err':'a-warn';
+    out.innerHTML='<div class="alert '+cls+'" style="margin-top:10px"><i class="ti ti-message-2 a-icon"></i>HTTP '+res.status+' · ACK <strong>'+(data.ack_code||'?')+'</strong>'+(data.error?' — '+escapeHtml(data.error):'')+'</div>'
+      +'<div class="fl">ACK devolvido ao emissor</div><div class="token-display" style="max-height:110px">'+escapeHtml(String(data.ack||'').replace(/\r/g,'\n'))+'</div>';
+    if(data.trace){
+      data.trace.stages=Object.assign({receive:{ok:true,message:'Mensagem HL7 v2 '+(data.trace.control_id||'')+' convertida em Bundle FHIR'}},data.trace.stages);
+      data.trace.source='HL7 v2 ORU^R01';data.trace.received_by={user_name:SESSION.name,role:SESSION.role};
+      renderIngestTrace({ok:data.ack_code==='AA',trace:data.trace},null);
+    }
+  }catch(e){out.innerHTML='<div class="alert a-err"><i class="ti ti-alert-circle a-icon"></i>'+e.message+'</div>';}
+}
+
+async function loadSampleBundle(numpedido){
+  try{
+    var bundle=await api('GET','/api/fhir/sample-bundle/'+encodeURIComponent(SOURCE)+'/'+encodeURIComponent(numpedido));
+    document.getElementById('ingest-payload').value=JSON.stringify(bundle,null,2);
+    toast('success','Bundle carregado',numpedido+' · '+(bundle.entry||[]).length+' recursos');
+  }catch(e){
+    toast('error','Erro a carregar',e.message);
+  }
+}
+
+async function submitIngest(){
+  var div=document.getElementById('ingest-trace');
+  var raw=document.getElementById('ingest-payload').value.trim();
+  if(!raw){toast('error','Sem dados','Cole um Bundle ou clique num dos exemplos');return;}
+
+  var bundle;
+  try{ bundle=JSON.parse(raw); }
+  catch(e){toast('error','JSON inválido',e.message);return;}
+
+  var source=document.getElementById('ingest-source').value||'external';
+  div.innerHTML='<div class="card" style="margin-top:12px"><div class="cb"><div class="empty"><i class="ti ti-loader spin"></i>A executar pipeline: recepção → validação estrutural → validação terminológica → persistência…</div></div></div>';
+
+  try{
+    var res=await fetch(location.origin+'/api/fhir/ingest',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+TOKEN,'X-Source-Institution':source},
+      body:JSON.stringify(bundle),
+    });
+    var data=await res.json();
+    renderIngestTrace(data, bundle);
+  }catch(e){
+    div.innerHTML='<div class="alert a-err"><i class="ti ti-alert-circle a-icon"></i>'+e.message+'</div>';
+  }
+}
+
+function renderIngestTrace(data, originalBundle){
+  var div=originalBundle?document.getElementById('ingest-trace'):document.getElementById('oru-result').appendChild(document.createElement('div'));
+  var t=data.trace||{};
+  var s=t.stages||{};
+  var sevCls={fatal:'bg-red',error:'bg-red',warning:'bg-amber',information:'bg-blue'};
+
+  // Overall summary
+  var overallBadge=data.ok
+    ? '<span class="badge bg-green"><i class="ti ti-check" style="margin-right:3px"></i>'+(t.overall||'OK').toUpperCase()+'</span>'
+    : '<span class="badge bg-red"><i class="ti ti-x" style="margin-right:3px"></i>'+(t.overall||'FAIL').toUpperCase()+'</span>';
+
+  var html='<div class="card" style="margin-top:12px">'
+    +'<div class="ch"><span class="cht">Resultado da pipeline</span>'+overallBadge+'</div>'
+    +'<div class="cb">'
+    +'<div class="two" style="margin-bottom:6px">'
+    +'<div><div class="fl">Exchange ID (auditoria)</div><div class="mono" style="font-size:10px">'+(t.exchange_id||'—')+'</div></div>'
+    +'<div><div class="fl">Origem</div><div>'+t.source+'</div></div>'
+    +'<div><div class="fl">Recursos no Bundle</div><div>'+(t.entry_count!=null?t.entry_count:((s.persist||{}).entries_total||'—'))+'</div></div>'
+    +'<div><div class="fl">Recebido por</div><div>'+((t.received_by||{}).user_name||'—')+' <span style="color:var(--gy600);font-size:11px">('+((t.received_by||{}).role||'')+')</span></div></div>'
+    +'<div><div class="fl">Início</div><div class="mono" style="font-size:10px">'+(t.started_at||'—')+'</div></div>'
+    +'<div><div class="fl">Fim</div><div class="mono" style="font-size:10px">'+(t.finished_at||'—')+'</div></div>'
+    +'</div></div></div>';
+
+  // Stage 1: Receive
+  html+='<div class="card" style="margin-top:10px"><div class="ch">'
+    +'<span class="cht"><i class="ti ti-inbox" style="margin-right:6px"></i>Etapa 1: Recepção</span>'
+    +'<span class="badge bg-green">OK</span></div>'
+    +'<div class="cb"><div class="fl">Mensagem</div><div>'+s.receive.message+'</div></div></div>';
+
+  // Stage 2: Structural validation
+  var st=s.structural||{skipped:true};
+  var stOk=st.ok===true;
+  if(st.skipped){ html+='<div class="card" style="margin-top:10px"><div class="ch"><span class="cht"><i class="ti ti-checkup-list" style="margin-right:6px"></i>Etapa 2: Validação estrutural</span><span class="badge bg-gray">SKIPPED</span></div><div class="cb"><div class="empty"><i class="ti ti-info-circle"></i>Não executada nesta via (ORU_STRUCTURAL_VALIDATION=false)</div></div></div>'; } else {
+  var stCounts=st.counts||{fatal:0,error:0,warning:0,information:0,total:0};
+  html+='<div class="card" style="margin-top:10px"><div class="ch">'
+    +'<span class="cht"><i class="ti ti-checkup-list" style="margin-right:6px"></i>Etapa 2: Validação estrutural (HAPI FhirValidator)</span>'
+    +(stOk?'<span class="badge bg-green">VALID</span>':'<span class="badge bg-red">INVALID</span>')+'</div>'
+    +'<div class="cb">'
+    +'<div class="mg" style="margin:6px 0 12px 0">'
+    +'<div class="mc" style="border-top:3px solid var(--rd)"><div class="ml">Errors</div><div class="mv" style="color:var(--rd)">'+(stCounts.error+stCounts.fatal)+'</div></div>'
+    +'<div class="mc aa"><div class="ml">Warnings</div><div class="mv mv-a">'+stCounts.warning+'</div></div>'
+    +'<div class="mc ab"><div class="ml">Information</div><div class="mv mv-p">'+stCounts.information+'</div></div>'
+    +'<div class="mc"><div class="ml">Total</div><div class="mv">'+stCounts.total+'</div></div>'
+    +'</div>'
+    +((st.issues||[]).length===0
+      ?'<div class="empty"><i class="ti ti-check"></i>Sem issues</div>'
+      :'<div class="tbl-w"><table><thead><tr><th>Severity</th><th>Code</th><th>Location</th><th>Diagnostics</th></tr></thead><tbody>'
+        +st.issues.map(function(i){
+          return '<tr>'
+            +'<td><span class="badge '+(sevCls[i.severity]||'bg-gray')+'">'+i.severity+'</span></td>'
+            +'<td class="mono" style="font-size:10px">'+(i.code||'')+'</td>'
+            +'<td class="mono" style="font-size:10px">'+(i.location||'—')+'</td>'
+            +'<td style="font-size:11px">'+escapeHtml(i.diagnostics||'')+'</td>'
+            +'</tr>';
+        }).join('')
+        +'</tbody></table></div>')
+    +'</div></div>';
+  }
+
+  // Stage 3: Terminology
+  var tm=s.terminology||{};
+  if(tm.skipped){
+    html+='<div class="card" style="margin-top:10px"><div class="ch">'
+      +'<span class="cht"><i class="ti ti-language" style="margin-right:6px"></i>Etapa 3: Validação terminológica</span>'
+      +'<span class="badge bg-gray">SKIPPED</span></div>'
+      +'<div class="cb"><div class="empty"><i class="ti ti-info-circle"></i>'+tm.reason+'</div></div></div>';
+  } else {
+    html+='<div class="card" style="margin-top:10px"><div class="ch">'
+      +'<span class="cht"><i class="ti ti-language" style="margin-right:6px"></i>Etapa 3: Validação terminológica</span>'
+      +(tm.ok?'<span class="badge bg-green">OK</span>':'<span class="badge bg-red">ERRO</span>')+'</div>'
+      +'<div class="cb">'
+      +'<div class="mg" style="margin:6px 0 12px 0">'
+      +'<div class="mc ab"><div class="ml">Codings totais</div><div class="mv mv-p">'+(tm.totalCodings||0)+'</div></div>'
+      +'<div class="mc ag"><div class="ml">Resolvidos</div><div class="mv mv-g">'+(tm.validated||0)+'</div></div>'
+      +'<div class="mc" style="border-top:3px solid var(--rd)"><div class="ml">Não resolvidos</div><div class="mv" style="color:var(--rd)">'+(tm.unresolved||0)+'</div></div>'
+      +'<div class="mc aa"><div class="ml">Offline</div><div class="mv mv-a">'+(tm.offline||0)+'</div></div>'
+      +'<div class="mc"><div class="ml">Locais (não verificáveis)</div><div class="mv">'+(tm.local||0)+'</div></div>'
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--gy600)">Codings por sistema: '+JSON.stringify(tm.perSystem||{})+'</div>'
+      +'</div></div>';
+  }
+
+  // Stage 4: Persistence
+  var p=s.persist||{};
+  var pOk=p.ok===true;
+  html+='<div class="card" style="margin-top:10px"><div class="ch">'
+    +'<span class="cht"><i class="ti ti-database-import" style="margin-right:6px"></i>Etapa 4: Persistência no HAPI FHIR</span>'
+    +(pOk?'<span class="badge bg-green">STORED</span>':'<span class="badge bg-red">FAILED</span>')+'</div>'
+    +'<div class="cb">';
+  if(pOk){
+    html+='<div class="two" style="margin-bottom:8px">'
+      +'<div><div class="fl">Recursos persistidos</div><div>'+p.entries_created+' / '+p.entries_total+'</div></div>'
+      +'<div><div class="fl">Registo de auditoria</div><div>'+(t.audit||'—')+'</div></div>'
+      +'</div>'
+      +'<div class="fl" style="margin-bottom:4px">Resposta do HAPI por entrada:</div>'
+      +'<div class="tbl-w"><table><thead><tr><th>Status</th><th>Location</th></tr></thead><tbody>'
+      +(p.hapi_response_summary||[]).map(function(e){
+        var cls=/^20/.test(e.status)?'bg-green':'bg-red';
+        return '<tr><td><span class="badge '+cls+'">'+e.status+'</span></td>'
+          +'<td class="mono" style="font-size:10px">'+(e.location||'—')+'</td></tr>';
+      }).join('')
+      +'</tbody></table></div>';
+  } else {
+    html+='<div class="alert a-err"><i class="ti ti-alert-circle a-icon"></i>'+(p.error||'unknown error')+'</div>';
+  }
+  html+='</div></div>';
+
+  // The two JSON viewers — incoming Bundle + HAPI response
+  var hapiJson=JSON.stringify(p.hapi_response||{},null,2);
+  var tid=(t.exchange_id||'trace').slice(0,8);
+  if(!originalBundle){ div.innerHTML=html; return; }
+  var inJson=JSON.stringify(originalBundle,null,2);
+
+  html+='<div class="card" style="margin-top:10px"><div class="ch">'
+    +'<span class="cht">JSON do Bundle recebido</span>'
+    +'<button class="bg" style="font-size:10px" onclick="downloadJson(\'received-'+tid+'.json\','+JSON.stringify(inJson)+')"><i class="ti ti-download"></i>Descarregar</button>'
+    +'</div><div class="cb"><div class="token-display" style="max-height:240px">'+escapeHtml(inJson)+'</div></div></div>';
+
+  html+='<div class="card" style="margin-top:10px"><div class="ch">'
+    +'<span class="cht">JSON da resposta do HAPI (transaction-response)</span>'
+    +'<button class="bg" style="font-size:10px" onclick="downloadJson(\'hapi-response-'+tid+'.json\','+JSON.stringify(hapiJson)+')"><i class="ti ti-download"></i>Descarregar</button>'
+    +'</div><div class="cb"><div class="token-display" style="max-height:240px">'+escapeHtml(hapiJson)+'</div></div></div>';
+
+  div.innerHTML=html;
+}
+
+function downloadJson(filename, jsonStr){
+  var blob=new Blob([jsonStr],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+  toast('success','Descarregado',filename);
+}
+
+async function renderExchanges(c){
+  var data=await api('GET','/audit/exchanges?limit=100');
+  var opCls={sync_order:'bg-blue',bundle_ingest:'bg-navy',oru_ingest:'bg-amber',bundle_post:'bg-prl'};
+  c.innerHTML='<div class="ph"><div><div class="pt">Histórico de trocas FHIR</div><div class="ps">Bundles trocados com o HAPI FHIR · audit.exchange_log · payloads retidos 90 dias</div></div>'
+    +'<div class="br">'
+    +'<button class="bg" onclick="render(\'exchanges\')"><i class="ti ti-refresh"></i>Refresh</button>'
+    +'<button class="bg" onclick="download(\'/audit/exchanges.csv\')"><i class="ti ti-file-spreadsheet"></i>CSV</button>'
+    +'<button class="bg" onclick="download(\'/audit/exchanges.json\')"><i class="ti ti-braces"></i>JSON</button>'
+    +'</div></div>'
+    +'<div class="alert a-info"><i class="ti ti-info-circle a-icon"></i>Cada linha representa uma troca FHIR. Clique no ID para inspeccionar o bundle completo (JSON enviado + resposta HAPI).</div>'
+    +'<div class="mg">'
+    +'<div class="mc ab"><div class="ml">Total trocas</div><div class="mv mv-p">'+data.total+'</div><div class="ms">audit.exchange_log</div></div>'
+    +'<div class="mc ag"><div class="ml">Sucesso</div><div class="mv mv-g">'+data.entries.filter(function(e){return e.status==="ok"}).length+'</div><div class="ms">status=ok</div></div>'
+    +'<div class="mc"><div class="ml">Erros</div><div class="mv" style="color:var(--rd)">'+data.entries.filter(function(e){return e.status==="error"}).length+'</div><div class="ms">status=error</div></div>'
+    +'<div class="mc"><div class="ml">Pendentes</div><div class="mv">'+data.entries.filter(function(e){return e.status==="pending"}).length+'</div><div class="ms">intenção sem resultado</div></div>'
+    +'<div class="mc aa"><div class="ml">Payloads purgados</div><div class="mv mv-a">'+data.entries.filter(function(e){return e.payload_purged}).length+'</div><div class="ms">> 90 dias</div></div>'
+    +'</div>'
+    +'<div class="card"><div class="tbl-w"><table>'
+    +'<thead><tr><th>ID</th><th>Quando</th><th>Utilizador</th><th>Operação</th><th>Order / Bundle</th><th>Recursos</th><th>Estado</th><th>Payload</th></tr></thead><tbody>'
+    +(data.entries.length===0?'<tr><td colspan="8"><div class="empty"><i class="ti ti-arrows-exchange"></i>Sem trocas registadas</div></td></tr>'
+      :data.entries.map(function(e){return '<tr>'
+        +'<td class="mono" style="font-size:10px">'+e.exchange_id.slice(0,8)+'…</td>'
+        +'<td class="mono" style="font-size:11px">'+new Date(e.occurred_at).toLocaleString('pt-PT')+'</td>'
+        +'<td><div>'+(e.user_name||'—')+'</div><div style="font-size:9px;color:var(--gy600)">'+(e.role||'')+'</div></td>'
+        +'<td><span class="badge '+(opCls[e.operation]||'bg-gray')+'">'+e.operation+'</span></td>'
+        +'<td class="mono" style="font-size:10px">'+(e.order_id||e.bundle_id||'—')+'</td>'
+        +'<td>'+(e.resource_count!=null?'<span class="badge bg-blue">'+e.resource_count+'</span>':'—')+'</td>'
+        +'<td>'+(e.status==='ok'?'<span class="badge bg-green">OK</span>':e.status==='pending'?'<span class="badge bg-amber" title="intenção registada sem resultado">pendente</span>':'<span class="badge bg-red" title="'+escapeHtml(e.error_message||'')+'">erro</span>')+'</td>'
+        +'<td><button class="bg" style="font-size:10px;padding:3px 8px" onclick="showExchange(\''+e.exchange_id+'\')" '+(e.payload_purged?'disabled title="purgado após 90 dias"':'')+'><i class="ti ti-eye"></i>Ver</button></td>'
+        +'</tr>';}).join(''))
+    +'</tbody></table></div></div>';
+}
+
+async function showExchange(id){
+  try{
+    var ex=await api('GET','/audit/exchanges/'+id);
+    var rows=ex.rows||[];
+    var intent=rows.filter(function(r){return r.phase==='intent'})[0]||rows[0]||{};
+    var outcome=rows.filter(function(r){return r.phase==='outcome'})[0]||null;
+    var status=outcome?outcome.status:'pending';
+    openModal('Troca FHIR · '+id.slice(0,8),
+      '<div class="two" style="margin-bottom:10px">'
+      +'<div><div class="fl">Intenção registada</div><div class="mono" style="font-size:11px">'+new Date(intent.occurred_at).toLocaleString('pt-PT')+'</div></div>'
+      +'<div><div class="fl">Resultado registado</div><div class="mono" style="font-size:11px">'+(outcome?new Date(outcome.occurred_at).toLocaleString('pt-PT'):'—')+'</div></div>'
+      +'<div><div class="fl">Operação</div><div><span class="badge bg-blue">'+intent.operation+'</span></div></div>'
+      +'<div><div class="fl">Estado</div><div>'+(status==='ok'?'<span class="badge bg-green">OK</span>':status==='pending'?'<span class="badge bg-amber">pendente</span>':'<span class="badge bg-red">erro</span>')+'</div></div>'
+      +'<div><div class="fl">Utilizador</div><div>'+(intent.user_name||'—')+' <span style="color:var(--gy600);font-size:11px">('+(intent.role||'')+')</span></div></div>'
+      +'<div><div class="fl">Order / Bundle ID</div><div class="mono" style="font-size:11px">'+(intent.order_id||intent.bundle_id||'—')+'</div></div>'
+      +'</div>'
+      +(outcome&&outcome.error_message?'<div class="alert a-err"><i class="ti ti-alert-circle a-icon"></i>'+escapeHtml(outcome.error_message)+'</div>':'')
+      +(intent.payload_purged?'<div class="alert a-warn"><i class="ti ti-clock-x a-icon"></i>Payload purgado após 90 dias (política de retenção)</div>'
+        :'<div class="card" style="margin-bottom:8px"><div class="ch"><span class="cht">Bundle enviado (payload_json)</span></div><div class="cb"><div class="token-display" style="max-height:170px">'+escapeHtml(JSON.stringify(intent.payload_json,null,2))+'</div></div></div>'
+        +(outcome&&outcome.response_json?'<div class="card"><div class="ch"><span class="cht">Resposta do HAPI (response_json)</span></div><div class="cb"><div class="token-display" style="max-height:170px">'+escapeHtml(JSON.stringify(outcome.response_json,null,2))+'</div></div></div>':''))
+    );
+  }catch(e){
+    toast('error','Erro',e.message);
+  }
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+function openModal(title,bodyHtml){
+  var ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,60,90,.5);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200';
+  ov.innerHTML='<div style="background:#fff;border-radius:var(--rl);padding:18px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:700;color:var(--nv)">'+title+'</div>'
+    +'<button class="bg" style="font-size:10px;padding:3px 8px" onclick="this.closest(\'.modalov\').remove()"><i class="ti ti-x"></i>Fechar</button></div>'
+    +bodyHtml+'</div>';
+  ov.className='modalov';
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+  document.body.appendChild(ov);
+}
+
+async function download(path){
+  try{
+    var res=await fetch(location.origin+path,{headers:{'Authorization':'Bearer '+TOKEN}});
+    if(!res.ok){toast('error','Download falhou','HTTP '+res.status);return;}
+    var blob=await res.blob();
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download=path.split('/').pop();
+    document.body.appendChild(a);a.click();a.remove();
+    URL.revokeObjectURL(url);
+    toast('success','Descarregado',a.download);
+  }catch(e){
+    toast('error','Erro',e.message);
+  }
+}
+
+</script>
+</body>
+</html>

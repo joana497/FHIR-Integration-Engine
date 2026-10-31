@@ -1,0 +1,6 @@
+table,columns,used,mapped,fallback,rule,key,not mapped,used_pct,reason_audit/IT,reason_candidate,reason_duplicate,reason_encounter,reason_scheduling,reason_unknown,reason_workflow,reason_excluded,reason_billing
+dpedidos,47,19,13,2,4,0,28,40.4,3,4,3,2,7,4,5,0,0
+pedidos,20,8,5,0,1,2,12,40.0,1,2,2,0,0,4,2,1,0
+dexames,59,18,8,3,4,3,41,30.5,5,5,9,2,1,14,1,0,4
+exames,22,10,5,0,0,5,12,45.5,0,1,1,0,0,5,2,1,2
+resultados,22,22,14,0,1,7,0,100.0,0,0,0,0,0,0,0,0,0

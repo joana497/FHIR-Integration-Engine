@@ -1,0 +1,14 @@
+MSH|^~\&|LISC|LAB-C^^EXAMPLE|FHIR-ENGINE|EXAMPLE|20240402145100||ORU^R01^ORU_R01|LISC00000001|P|2.5.1|||AL|NE||UNICODE UTF-8
+PID|1||C700001^^^LISC^MR~700001^^^SNS^NNPRT||Lopes^Catarina||19410425|F
+ORC|RE|C-ORD-000001|C-FIL-000001||CM||||20240402145100|||^Mendes
+OBR|1|C-ORD-000001|C-FIL-000001-1|CBC^Hemograma com fórmula leucocitária (eritrograma, contagem de^99LISC|||202404020800|||||||||^Mendes||||||20240402145100||HM|F
+OBX|1|NM|HGB^Hemoglobina no sangue^99LISC^718-7^Hemoglobin [Mass/volume] in Blood^LN||13.7|g/dL^g/dL^99LISC|12.0-16.0|N|||F|||20240402145100
+OBX|2|NM|HCT^Hematócrito  de Sangue por Contagem Automatizada^99LISC^4544-3^Hematocrit [Volume Fraction] of Blood by Automated count^LN||43.2|%^%^99LISC|36.0-48.0|N|||F|||20240402145100
+OBX|3|NM|RBC^Eritrócitos  no sangue por contagem automatizada^99LISC||4.89|10*6/uL^10*6/uL^UCUM|4.0-5.5|N|||F|||20240402145100
+OBX|4|NM|MCV^MCV [volume Entítico] por contagem automatizada^99LISC^787-2^MCV [Entitic volume] by Automated count^LN||85.8|fL^fL^UCUM|80.0-100.0|N|||F|||20240402145100
+OBX|5|NM|MCH^MCH [Massa Entítica] por Contagem Automatizada^99LISC||30.2|pg^pg^UCUM|27.0-33.0|N|||F|||20240402145100
+OBX|6|NM|MCHC^MCHC por contagem automatizada^99LISC^786-4^MCHC [Mass/volume] by Automated count^LN||31.8|g/dL^g/dL^UCUM|32.0-36.0|L|||F|||20240402145100
+OBX|7|NM|WBC^Leucócitos  no sangue por contagem automatizada^99LISC||7.4|10*3/uL^10*3/uL^UCUM|4.0-10.0|N|||F|||20240402145100
+OBX|8|NM|NEUT^Neutrófilos  no sangue por contagem automatizada^99LISC^751-8^Neutrophils  in Blood by Automated count^LN||2.0|10*3/uL^10*3/uL^UCUM|1.8-7.5|N|||F|||20240402145100
+OBX|9|NM|LYMPH^Linfócitos  no sangue por contagem automatizada^99LISC^731-0^Lymphocytes  in Blood by Automated count^LN||2.3|10*3/uL^10*3/uL^99LISC|1.0-4.0|N|||F|||20240402145100
+OBX|10|NM|PLT^Plaquetas  no sangue por contagem automatizada^99LISC||438|10*3/uL^10*3/uL^99LISC|150-400|H|||F|||20240402145100

@@ -1,0 +1,40 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Reference configuration for the HAPI FHIR JPA server.
+#
+# NOTE: docker-compose.yml does NOT mount this file; the running server is
+# configured by the environment variables of the hapi-fhir service, which
+# set the same datasource and options. To use this file instead, mount it
+# (./hapi-fhir/application.yaml:/app/config/application.yaml:ro) and set
+# SPRING_CONFIG_LOCATION=file:///app/config/application.yaml. You should
+# verify the expected config path for the HAPI image version you pin.
+# ─────────────────────────────────────────────────────────────────────────────
+spring:
+  datasource:
+    url: 'jdbc:postgresql://hapi-postgres:5432/hapifhirdb'
+    username: hapi_user
+    password: hapi_pass
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.search.enabled: false
+
+hapi:
+  fhir:
+    fhir_version: R4
+    server_address: http://localhost:8080/fhir
+    allow_multiple_delete: true
+    allow_external_references: true
+    cors:
+      allow_Credentials: true
+      allowed_origin:
+        - '*'
+    bulk_export_enabled: true
+    subscription:
+      resthook_enabled: true
+      websocket_enabled: false
+    narrative_enabled: false
+    mdm_enabled: false
+    advanced_lucene_indexing: false
+    opensearch:
+      enabled: false

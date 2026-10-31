@@ -1,0 +1,171 @@
+table,column,type,status,fhir_target,rule,reason,note,in_supplied_schema
+dpedidos,numpedido,VARCHAR(64),mapped,ServiceRequest.identifier; ServiceRequest.id,identifier system .../sid/sil-order; id = UUID v5 of system + value,,Also prefixes the identifiers of the order's Observations; joins pedidos and dexames.,True
+dpedidos,numprocesso,NUMERIC(15),not mapped,,,candidate,Hospital record number (inferred). Target: a second Patient.identifier (type MR) once its meaning is confirmed.,True
+dpedidos,episodio,NUMERIC(20),not mapped,,,encounter,Episode number (SPMS: NUM_EPISODIO). Target: Encounter.identifier.,True
+dpedidos,modulo,VARCHAR(3),fallback,ServiceRequest.code.text,used when designamodulo is empty,,Module of the episode (SPMS: COD_MODULO).,True
+dpedidos,designamodulo,VARCHAR(30),mapped,ServiceRequest.code.text,copied,,,True
+dpedidos,especialid,NUMERIC(12),not mapped,,,candidate,Requesting specialty code (inferred). Target: PractitionerRole.specialty of the requester.,True
+dpedidos,designaespecial,VARCHAR(40),not mapped,,,duplicate,Specialty name; the examination's own designaespecial (dexames) is used for the report.,True
+dpedidos,idser,VARCHAR(10),fallback,ServiceRequest.performer.display,used when servico is empty,,,True
+dpedidos,servico,VARCHAR(60),mapped,ServiceRequest.performer.display,copied,,,True
+dpedidos,datapedido,DATE,mapped,ServiceRequest.authoredOn,DATE -> FHIR date; also the last fallback of effectiveDateTime,,,True
+dpedidos,posto,VARCHAR(20),not mapped,,,duplicate,Workstation; the examination's posto (dexames) is used.,True
+dpedidos,dociddoente,NUMERIC(12),mapped,Patient.identifier; Patient.id,identifier system .../sid/sil-patient; id = UUID v5 of system + value,,Patient identifier in SIL. It is not asserted to be the SNS number.,True
+dpedidos,nomedoente,VARCHAR(100),mapped,"Patient.name (text, given, family)","full string -> name.text; first token -> given, last token -> family",,Heuristic: compound surnames are not split; name.text keeps the original.,True
+dpedidos,datanascimento,DATE,mapped,Patient.birthDate,DATE -> FHIR date,,,True
+dpedidos,sexo,VARCHAR(1),mapped,Patient.gender,"M -> male, F -> female, otherwise unknown",,,True
+dpedidos,modalidade,VARCHAR(20),rule,ServiceRequest.category; ServiceRequest.code (LOINC),SIL modality -> canonical category -> SNOMED CT category (108252007 / 363679005) and order-level LOINC,,The order-level LOINC codes are inherited and checked by the H7 run.,True
+dpedidos,numexame,VARCHAR(64),not mapped,,,duplicate,Link to the examination; the adapter follows dexames.numpedido instead.,True
+dpedidos,verificado,NUMERIC(1),rule,ServiceRequest.status,fechado = 1 -> completed; else verificado = 1 -> active; else draft,,,True
+dpedidos,avisado,NUMERIC(1),not mapped,,,workflow,Patient notified (inferred).,True
+dpedidos,marcado,NUMERIC(1),not mapped,,,scheduling,Booked (inferred).,True
+dpedidos,recolhido,NUMERIC(1),not mapped,,,workflow,Specimen collected (inferred); a Specimen resource is not produced.,True
+dpedidos,fechado,NUMERIC(1),rule,ServiceRequest.status,see verificado,,,True
+dpedidos,segura,NUMERIC(1),not mapped,,,unknown,,True
+dpedidos,utiliza,VARCHAR(32),not mapped,,,audit/IT,Application user (inferred).,True
+dpedidos,utilizamarca,VARCHAR(32),not mapped,,,audit/IT,User who booked (inferred).,True
+dpedidos,utilizarecolha,VARCHAR(32),not mapped,,,audit/IT,User who collected (inferred).,True
+dpedidos,tipoanalise,VARCHAR(1),not mapped,,,unknown,,True
+dpedidos,medico,VARCHAR(40),mapped,ServiceRequest.requester.display; ImagingStudy.referrer.display,copied as display text (no Practitioner resource),,,True
+dpedidos,serv,VARCHAR(10),not mapped,,,unknown,Internal service code (inferred).,True
+dpedidos,dataverificacao,DATE,not mapped,,,workflow,,True
+dpedidos,datamarcado,DATE,not mapped,,,scheduling,,True
+dpedidos,datamarcacao,DATE,not mapped,,,scheduling,,True
+dpedidos,horamarcacao,DATE,not mapped,,,scheduling,,True
+dpedidos,datarecolha,DATE,not mapped,,,candidate,Collection date (inferred). Target: Specimen.collection.collectedDateTime.,True
+dpedidos,datachegada,DATE,not mapped,,,workflow,Arrival date (inferred).,True
+dpedidos,datachamada,DATE,not mapped,,,workflow,Call date (inferred).,True
+dpedidos,dataexame,DATE,mapped,ServiceRequest.occurrenceDateTime,DATE -> FHIR date; also a fallback of effectiveDateTime,,,True
+dpedidos,urgente,NUMERIC(3),rule,ServiceRequest.priority,"> 0 -> urgent, otherwise routine",,,True
+dpedidos,observacoes,VARCHAR(2000),mapped,ServiceRequest.note.text,copied,,,True
+dpedidos,infclinica,VARCHAR(4000),mapped,ServiceRequest.reasonCode.text,copied,,Free-text clinical information; not coded.,True
+dpedidos,contraindic,VARCHAR(2000),mapped,ServiceRequest.note.text,prefixed 'Contraindication: ',,,True
+dpedidos,sugmarcacao,VARCHAR(2000),not mapped,,,scheduling,Booking suggestion (inferred).,True
+dpedidos,pedidomae,VARCHAR(64),not mapped,,,candidate,"Parent order (inferred). Target: ServiceRequest.basedOn, once its meaning is confirmed.",True
+dpedidos,postoagenda,VARCHAR(30),not mapped,,,scheduling,,True
+dpedidos,ref_entrada,VARCHAR(20),not mapped,,,unknown,,True
+dpedidos,bloqagenda,NUMERIC(1),not mapped,,,scheduling,,True
+dpedidos,triagem,VARCHAR(10),not mapped,,,encounter,Triage (inferred).,True
+pedidos,numpedido,VARCHAR(64),key,,join to dpedidos,,,True
+pedidos,ordem,NUMERIC(4),key,ServiceRequest.orderDetail (order),orders the lines,,,True
+pedidos,idser,VARCHAR(10),not mapped,,,duplicate,Same service as the order header.,True
+pedidos,modalidade,VARCHAR(20),not mapped,,,duplicate,The header modality is used.,True
+pedidos,codprotocolo,VARCHAR(10),mapped,ServiceRequest.orderDetail.coding (.../CodeSystem/sil-protocol),copied,,"Local code, kept for provenance; no ConceptMap target by design.",True
+pedidos,designacaoprotocolo,VARCHAR(90),mapped,ServiceRequest.orderDetail.coding.display,copied,,,True
+pedidos,codprop,VARCHAR(1),not mapped,,,unknown,,True
+pedidos,verificado,NUMERIC(1),not mapped,,,workflow,Line-level verification.,True
+pedidos,dataverificacao,DATE,not mapped,,,workflow,,True
+pedidos,pedidofilho,VARCHAR(64),not mapped,,,unknown,Child order (inferred).,True
+pedidos,cod_pedido,VARCHAR(20),not mapped,,,unknown,Request code; in the demonstration data it repeats the analysis code.,True
+pedidos,des_pedido,VARCHAR(200),mapped,ServiceRequest.orderDetail.text,copied,,,True
+pedidos,notas_linhas,VARCHAR(2000),not mapped,,,candidate,"Line notes (e.g. fasting). Target: ServiceRequest.note, prefixed with the line number.",True
+pedidos,cancelar,NUMERIC,rule,ServiceRequest.orderDetail; ServiceRequest.note,a cancelled line (cancelar <> 0) is left out of orderDetail and reported in a note,,,True
+pedidos,datamsg,DATE,not mapped,,,audit/IT,Message date (inferred).,True
+pedidos,numactomed,NUMERIC,not mapped,,,unknown,Possibly the institution's act number (SPMS: NUM_ACTO); not confirmed.,True
+pedidos,id_bdnr,VARCHAR(30),not mapped,,,candidate,"Identifier of the MCDT in the BDNR (SPMS). Target: an identifier per line, which needs one ServiceRequest per MCDT.",True
+pedidos,id_requisicao,VARCHAR(30),mapped,ServiceRequest.requisition,system .../sid/pt-bdnr-requisition; only when all active lines share one value,,Requisition identifier in the BDNR (SPMS: ID_REQUISICAO).,True
+pedidos,cod_mcdt,VARCHAR(51),mapped,ServiceRequest.orderDetail.coding (.../CodeSystem/pt-conv-mcdt) + SNOMED CT,"kept as stored (area + convention code, e.g. A697.1); SNOMED CT added from the ConceptMap",,SPMS: COD_MCDT = convention area + code of the convention price table.,True
+pedidos,pin_agendamento,VARCHAR(10),not mapped,,,excluded,"Booking PIN of the requisition (SPMS): an access credential, not clinical data.",True
+dexames,numexame,VARCHAR(64),mapped,DiagnosticReport.identifier; ImagingStudy.identifier,identifier system .../sid/sil-report; part of the deterministic ids,,,True
+dexames,versao,NUMERIC(4),key,,part of the examination key,,Each version produces its own report; choosing the latest version is future work.,True
+dexames,numprocesso,NUMERIC(15),not mapped,,,duplicate,Repeats the order header.,True
+dexames,episodio,NUMERIC(20),not mapped,,,duplicate,,True
+dexames,modulo,VARCHAR(3),not mapped,,,duplicate,,True
+dexames,designamodulo,VARCHAR(30),not mapped,,,duplicate,,True
+dexames,especialid,NUMERIC(7),not mapped,,,duplicate,,True
+dexames,designaespecial,VARCHAR(40),mapped,"DiagnosticReport.code (display, text); ImagingStudy.description; series.description",copied; 'Microbiologia' also sets the category MB,,,True
+dexames,idser,VARCHAR(10),key,ImagingStudy.location.display (fallback),part of the examination key; location when posto is empty,,,True
+dexames,servico,VARCHAR(100),fallback,DiagnosticReport.code.text; ImagingStudy.description,used when designaespecial is empty,,,True
+dexames,datapedido,DATE,fallback,DiagnosticReport.effectiveDateTime; Observation.effectiveDateTime,used when dataexame is empty,,,True
+dexames,dataexame,DATE,mapped,DiagnosticReport.effectiveDateTime; Observation.effectiveDateTime; ImagingStudy.started,DATE -> FHIR date,,,True
+dexames,dociddoente,NUMERIC(12),not mapped,,,duplicate,The patient is taken from the order header.,True
+dexames,nomedoente,VARCHAR(100),not mapped,,,duplicate,,True
+dexames,datanascimento,DATE,not mapped,,,duplicate,,True
+dexames,sexo,VARCHAR(1),not mapped,,,duplicate,,True
+dexames,pathrelatorio,VARCHAR(100),not mapped,,,candidate,"Path of the report file (inferred). Target: DiagnosticReport.presentedForm, if the file is reachable.",True
+dexames,grupo,VARCHAR(20),mapped,DiagnosticReport.code.coding (.../CodeSystem/sil-exam-group),copied; part of the examination key,,Local code; no ConceptMap target by design.,True
+dexames,numpedido,VARCHAR(64),key,DiagnosticReport.basedOn; ImagingStudy.basedOn,joins the examination to its order,,,True
+dexames,verificado,NUMERIC(1),rule,DiagnosticReport.status; ImagingStudy.status,-> registered when no report exists yet,,,True
+dexames,facturado,NUMERIC(1),not mapped,,,billing,,True
+dexames,imagem,NUMERIC(1),not mapped,,,unknown,Image available (inferred).,True
+dexames,relatorio,NUMERIC(2),rule,DiagnosticReport.status,relatorio and fechado -> final; relatorio only -> preliminary,,,True
+dexames,fechado,NUMERIC(1),rule,DiagnosticReport.status; ImagingStudy.status,-> final (report) / available (study),,,True
+dexames,segura,NUMERIC(1),not mapped,,,unknown,,True
+dexames,utiliza,VARCHAR(32),not mapped,,,audit/IT,,True
+dexames,tipoanalise,VARCHAR(1),not mapped,,,unknown,,True
+dexames,medico,VARCHAR(40),mapped,DiagnosticReport.performer.display; Observation.performer.display (fallback),copied as display text,,,True
+dexames,serv,VARCHAR(10),not mapped,,,unknown,,True
+dexames,dataverificacao,DATE,fallback,DiagnosticReport.issued,used when datarelat is empty,,,True
+dexames,datafacturacao,DATE,not mapped,,,billing,,True
+dexames,datarelat,DATE,mapped,DiagnosticReport.issued,"DATE -> instant (00:00 local time of the source, SOURCE_TIMEZONE, default Europe/Lisbon)",,SIL stores a date only; the time of the instant is therefore not meaningful.,True
+dexames,datafecho,DATE,not mapped,,,workflow,Closure date (inferred).,True
+dexames,dataimagem,DATE,not mapped,,,unknown,,True
+dexames,subsistema,NUMERIC(6),not mapped,,,billing,Health subsystem / payer (inferred).,True
+dexames,proveniencia,NUMERIC(2),not mapped,,,encounter,Origin of the patient (inferred).,True
+dexames,listaestudos,VARCHAR(100),not mapped,,,unknown,List of studies (inferred); format unknown.,True
+dexames,ccusto,NUMERIC(20),not mapped,,,billing,Cost centre (inferred).,True
+dexames,listatecnicos,VARCHAR(100),not mapped,,,candidate,Technicians (inferred). Target: ImagingStudy.series.performer.,True
+dexames,posto,VARCHAR(20),mapped,ImagingStudy.location.display,copied,,,True
+dexames,modalidade,VARCHAR(20),rule,"DiagnosticReport.category (v2-0074); ImagingStudy.modality, series.modality (DICOM); Observation.category",SIL modality -> canonical category -> v2-0074 section and DICOM modality,,,True
+dexames,dauditado,DATE,not mapped,,,audit/IT,,True
+dexames,dexaminado,DATE,not mapped,,,unknown,,True
+dexames,numeroprov,VARCHAR(64),not mapped,,,unknown,,True
+dexames,dta_alta,DATE,not mapped,,,encounter,Discharge date (inferred).,True
+dexames,nomefich,VARCHAR(64),not mapped,,,audit/IT,File name (inferred).,True
+dexames,dataimpressao,DATE,not mapped,,,audit/IT,Print date (inferred).,True
+dexames,horapedido,VARCHAR(10),not mapped,,,candidate,Time of the request as text (inferred). Target: combine with datapedido into a dateTime.,True
+dexames,horaexame,VARCHAR(10),not mapped,,,candidate,Time of the examination as text (inferred). Target: combine with dataexame into a dateTime.,True
+dexames,idserori,VARCHAR(40),not mapped,,,unknown,Originating service (inferred).,True
+dexames,nori,NUMERIC(1),not mapped,,,unknown,,True
+dexames,bodypart,VARCHAR(500),mapped,ImagingStudy.series.bodySite.display,copied as display text (not coded),,,True
+dexames,dta_consulta,DATE,not mapped,,,scheduling,,True
+dexames,next_especialidade,VARCHAR(50),not mapped,,,unknown,,True
+dexames,mrelat,NUMERIC,not mapped,,,unknown,,True
+dexames,dataversao,DATE,not mapped,,,audit/IT,Version date (inferred).,True
+dexames,privado,VARCHAR(1),not mapped,,,candidate,Possibly a privacy flag (inferred). If so it must become meta.security (e.g. confidentiality R) before production use.,True
+dexames,req_idser,VARCHAR(100),not mapped,,,unknown,,True
+dexames,aoucexame,NUMERIC(1),not mapped,,,unknown,,True
+exames,numexame,VARCHAR(64),key,,join to dexames,,,True
+exames,versao,NUMERIC(4),key,,join to dexames,,,True
+exames,ordem,NUMERIC(4),key,Observation (ordered test).identifier,part of the test key,,,True
+exames,validade,NUMERIC(3),not mapped,,,unknown,,True
+exames,idser,VARCHAR(10),key,,join to dexames,,,True
+exames,grupo,VARCHAR(20),key,,join to dexames,,,True
+exames,codigif,VARCHAR(10),mapped,Observation (ordered test).code.coding (.../CodeSystem/pt-sns-mcdt) + SNOMED CT,only five-digit values; SNOMED CT added from the ConceptMap,,Assumption: the IGIF code is the CPAL 'Código SNS' (ACSS table); to be confirmed.,True
+exames,designacaoigif,VARCHAR(200),mapped,Observation (ordered test).code.coding.display,copied,,,True
+exames,codigoanalise,VARCHAR(10),mapped,Observation (ordered test).code.coding (.../CodeSystem/sil-analysis),copied; part of the test key,,Local code; no ConceptMap target by design.,True
+exames,designacaoanalise,VARCHAR(200),mapped,Observation (ordered test).code.coding.display; code.text,copied,,,True
+exames,codprop,VARCHAR(1),not mapped,,,unknown,,True
+exames,verificado,NUMERIC(1),not mapped,,,workflow,The test status is derived from its results.,True
+exames,facturado,NUMERIC(1),not mapped,,,billing,,True
+exames,dataverificacao,DATE,not mapped,,,workflow,,True
+exames,datafacturacao,DATE,not mapped,,,billing,,True
+exames,tipoanestesia,VARCHAR(50),not mapped,,,unknown,Anaesthesia type (inferred); would map to Procedure.,True
+exames,medicoanestesia,VARCHAR(50),not mapped,,,unknown,Anaesthetist (inferred).,True
+exames,idserori,VARCHAR(10),not mapped,,,unknown,,True
+exames,id_bdnr,VARCHAR(30),not mapped,,,candidate,Identifier of the MCDT in the BDNR (SPMS).,True
+exames,id_requisicao,VARCHAR(30),not mapped,,,duplicate,The requisition is taken from pedidos.,True
+exames,cod_mcdt,VARCHAR(51),mapped,Observation (ordered test).code.coding (.../CodeSystem/pt-conv-mcdt),kept as stored (area + convention code),,SPMS: COD_MCDT.,True
+exames,pin_agendamento,VARCHAR(10),not mapped,,,excluded,Booking PIN (SPMS): an access credential.,True
+resultados,idser,VARCHAR(10),key,,join to exames,,,False
+resultados,grupo,VARCHAR(20),key,,join to exames,,,False
+resultados,numexame,VARCHAR(64),key,,join to exames,,,False
+resultados,codigoanalise,VARCHAR(10),key,,join to exames (assigns the result to its test),,,False
+resultados,versao,NUMERIC(4),key,,join to exames,,,False
+resultados,ordem,NUMERIC(4),key,,join to exames,,,False
+resultados,seq,NUMERIC(4),key,Observation (result).identifier; Observation (result).id,part of the result key,,,False
+resultados,codparametro,VARCHAR(20),mapped,Observation (result).code.coding (.../CodeSystem/sil-parameter) + LOINC,LOINC added from the ConceptMap (CPAL),,,False
+resultados,designacaoparametro,VARCHAR(200),mapped,Observation (result).code.coding.display; code.text,copied,,,False
+resultados,tiporesultado,VARCHAR(2),rule,Observation (result).value[x]; DiagnosticReport.conclusion,NM -> valueQuantity; CE -> valueCodeableConcept; TX -> valueString; CO -> DiagnosticReport.conclusion,,,False
+resultados,valornumerico,"NUMERIC(18,6)",mapped,Observation (result).valueQuantity.value,NUMERIC -> JSON number (integer when integral),,,False
+resultados,comparador,VARCHAR(2),mapped,Observation (result).valueQuantity.comparator,"copied (<, <=, >=, >)",,,False
+resultados,unidade,VARCHAR(30),mapped,Observation (result).valueQuantity.unit; .system/.code (UCUM),unit text as written; UCUM code from the ConceptMap,,,False
+resultados,codvalor,VARCHAR(30),mapped,Observation (result).valueCodeableConcept.coding (.../CodeSystem/sil-result-value) + SNOMED CT,SNOMED CT added from the ConceptMap (CPAL value sets),,,False
+resultados,valortexto,VARCHAR(4000),mapped,Observation (result).valueCodeableConcept.text / valueString; DiagnosticReport.conclusion,by tiporesultado,,,False
+resultados,refmin,"NUMERIC(18,6)",mapped,Observation (result).referenceRange.low,same unit and UCUM code as the value,,,False
+resultados,refmax,"NUMERIC(18,6)",mapped,Observation (result).referenceRange.high,same unit and UCUM code as the value,,,False
+resultados,reftexto,VARCHAR(100),mapped,Observation (result).referenceRange.text,copied,,,False
+resultados,flag,VARCHAR(3),mapped,Observation (result).interpretation (v3-ObservationInterpretation),"N, L, H, LL, HH, A, POS, NEG copied as codes; other values dropped",,,False
+resultados,estado,VARCHAR(1),mapped,Observation (result).status; Observation (ordered test).status,"F -> final, P -> preliminary, C -> corrected; the test takes the least final status",,,False
+resultados,dataresultado,TIMESTAMP,mapped,Observation (result).issued,"TIMESTAMP -> instant; a value without time zone is local time of the source (SOURCE_TIMEZONE, default Europe/Lisbon: +00:00 in winter, +01:00 in summer)",,The default assumes a mainland institution; set SOURCE_TIMEZONE for the Azores (Atlantic/Azores) or Madeira (Atlantic/Madeira).,False
+resultados,validadopor,VARCHAR(40),mapped,Observation (result).performer.display,copied,,,False
